@@ -10,6 +10,11 @@ created: 2026-08-26
 
 ## 2026-08-26
 
+### 补充：下载 Mooncake 论文 PDF
+
+- 下载论文 PDF 到 `raw/assets/2407.00079-mooncake.pdf`（666KB）
+- 更新 `raw/2026-08-26-mooncake-paper.md` 的 frontmatter（添加 attachments 字段）和相关资源部分（添加本地 PDF 链接）
+
 ### 收录：Mooncake 论文（第一篇资料）
 
 - **原始资料**：`raw/2026-08-26-mooncake-paper.md`

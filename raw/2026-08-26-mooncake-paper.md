@@ -7,6 +7,8 @@ affiliations: Moonshot AI, Tsinghua University
 published: 2024-06-24 (arXiv v1), 2025-09-03 (v4)
 venue: USENIX FAST 2025 (Best Paper Award)
 tags: [LLM serving, KVCache, disaggregated architecture, inference]
+attachments:
+  - assets/2407.00079-mooncake.pdf
 ingested: 2026-08-26
 ---
 
@@ -46,6 +48,7 @@ Experiments show that Mooncake excels in long-context scenarios. Compared to the
 
 ## 相关资源
 
-- 论文 PDF: https://arxiv.org/pdf/2407.00079.pdf
+- 本地 PDF: [assets/2407.00079-mooncake.pdf](assets/2407.00079-mooncake.pdf)（666KB，已下载）
+- 论文 PDF（在线）: https://arxiv.org/pdf/2407.00079.pdf
 - 开源仓库: https://github.com/kvcache-ai/Mooncake
 - 清华大学报道: https://www.cs.tsinghua.edu.cn/info/1034/6611.htm
