@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 import type { FileEntry } from '../types';
+import { isStaticMode, publicAssetUrl } from '../api';
 
 function escapeRegex(text: string) { return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
@@ -22,9 +23,9 @@ export function MarkdownView({ content, file, linkIndex, onWikiLink }: { content
     const images = [...container.querySelectorAll('img')];
     Promise.all(images.map(async (image) => {
       const src = image.getAttribute('src') || '';
-      if (!src || /^(https?:|data:|blob:|\/api\/)/.test(src)) return;
+      if (!src || /^(https?:|data:|blob:)/.test(src)) return;
       const base = file.path.split('/').slice(0, -1).join('/'); const normalized = new URL(src, `https://local/${base}/`).pathname.slice(1);
-      image.setAttribute('src', `/api/blob?path=${encodeURIComponent(normalized)}`);
+      image.setAttribute('src', isStaticMode ? publicAssetUrl(`content/${normalized}`) : `/api/blob?path=${encodeURIComponent(normalized)}`);
     })).then(() => { if (active) setResolved(container.innerHTML); });
     return () => { active = false; };
   }, [html, file.path]);
@@ -35,7 +36,7 @@ export function MarkdownView({ content, file, linkIndex, onWikiLink }: { content
 }
 
 export function ZoneBadge({ zone }: { zone: FileEntry['zone'] }) {
-  return <span className={`zone-badge zone-${zone}`}>{zone === 'raw' ? '原始 · 只读' : zone === 'wiki' ? '派生 · 可编辑' : '暂存 · 可编辑'}</span>;
+  return <span className={`zone-badge zone-${zone}`}>{isStaticMode ? '公开 · 只读' : zone === 'raw' ? '原始 · 只读' : zone === 'wiki' ? '派生 · 可编辑' : '暂存 · 可编辑'}</span>;
 }
 export function StatusBadge({ status }: { status?: string }) {
   if (!status) return null; return <span className={`status-badge status-${status}`}>{status === 'archived' ? '已归档' : status === 'review' ? '需确认' : '待整理'}</span>;

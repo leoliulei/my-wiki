@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+const staticMode = process.env.VITE_STATIC_MODE === 'true';
+const repositoryName = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'my-wiki';
+
 export default defineConfig({
+  base: staticMode ? `/${repositoryName}/` : '/',
   plugins: [react()],
   root: '.',
+  publicDir: staticMode ? '../static-generated' : 'public',
   build: {
     outDir: '../dist/client',
     emptyOutDir: true,

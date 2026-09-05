@@ -13,9 +13,11 @@
     "start": "tsx server/src/index.ts --open",
     "build": "npm run build:client && npm run typecheck",
     "build:client": "vite build client",
+    "build:pages": "tsx scripts/generate-static.ts && VITE_STATIC_MODE=true vite build client",
     "typecheck": "tsc --noEmit",
     "test": "vitest run server/test",
-    "test:ui": "tsx smoke.ts"
+    "test:ui": "tsx smoke.ts",
+    "test:pages": "tsx smoke-pages.ts"
   },
   "dependencies": {
     "@tiptap/extension-image": "^3.6.5",

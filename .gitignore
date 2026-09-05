@@ -15,3 +15,5 @@ Thumbs.db
 # Web 查看端构建产物
 web-viewer/node_modules/
 web-viewer/dist/
+web-viewer/static-generated/
+web-viewer/pages-preview/

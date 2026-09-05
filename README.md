@@ -6,7 +6,7 @@
 
 纯 Markdown · Git 可追溯 · 无数据库 · 无向量存储 · 内置 Web 阅读与编辑端
 
-[快速开始](#快速开始) · [Web 查看端](#web-查看端) · [知识库工作流](#知识库工作流) · [目录结构](#目录结构)
+[在线只读版](https://leoliulei.github.io/my-wiki/) · [快速开始](#快速开始) · [Web 查看端](#web-查看端) · [GitHub Pages](#github-pages) · [知识库工作流](#知识库工作流)
 
 </div>
 
@@ -89,6 +89,41 @@ Web 查看端并不复制知识库数据，而是直接扫描仓库中的 `inbox
 - 暂存项可复制 `收录 inbox/2026-09-06-某文章.md` 指令、标记归档或批量清理
 
 详细需求与边界见 [`docs/web-viewer-prd.md`](docs/web-viewer-prd.md)。
+
+## GitHub Pages
+
+仓库包含 [`.github/workflows/pages.yml`](.github/workflows/pages.yml)，每次向 `main` 推送 Web 代码或知识库内容时，GitHub Actions 会自动构建并部署静态只读站点：
+
+**https://leoliulei.github.io/my-wiki/**
+
+静态模式与本地模式的边界：
+
+| 本地完整模式 | GitHub Pages 模式 |
+| --- | --- |
+| 扫描本地 `inbox/`、`raw/`、`wiki/` | 只导出 Git 已追踪的 `raw/` 和 `wiki/` |
+| 支持编辑、收藏、上传、归档和网址抓取 | 强制只读，不包含写接口和 Express 服务 |
+| 可查看本机尚未提交的资料 | 不发布未提交文件，默认不发布 `inbox/` |
+| `npm start` 启动 | 推送到 `main` 后由 Actions 自动部署 |
+
+首次使用时，在 GitHub 仓库的 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**。后续工作流会自动完成构建与发布。
+
+本地预览 Pages 构建：
+
+```bash
+cd web-viewer
+GITHUB_REPOSITORY=leoliulei/my-wiki npm run build:pages
+mkdir -p pages-preview/my-wiki
+cp -R dist/client/. pages-preview/my-wiki/
+python -m http.server 4173 --directory pages-preview
+```
+
+然后访问 `http://127.0.0.1:4173/my-wiki/`，并可运行：
+
+```bash
+npm run test:pages
+```
+
+> GitHub Pages 是公开网站。进入 Git 历史的 `raw/` 与 `wiki/` 文件会被公开发布；不要提交密钥、个人隐私、公司内部资料或其他不应公开的内容。
 
 ## 知识库工作流
 
@@ -227,7 +262,9 @@ npm run dev        # 同时启动前后端开发服务
 npm run typecheck  # TypeScript 严格检查
 npm test           # 文件系统安全边界单元测试
 npm run build      # 生产构建 + 类型检查
-npm run test:ui    # Playwright 浏览器烟测并更新 README 截图
+npm run test:ui    # 本地完整模式浏览器烟测并更新 README 截图
+npm run build:pages # 导出 Git 已追踪内容并生成 Pages 静态站点
+npm run test:pages # 验证 /my-wiki/ 子路径下的静态只读模式
 npm start          # 启动生产构建
 ```
 

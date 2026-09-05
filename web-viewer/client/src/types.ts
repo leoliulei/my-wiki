@@ -33,6 +33,7 @@ export interface FileEntry {
   finalUrl?: string;
   contentType?: string;
   sha256?: string;
+  publicPath?: string;
   savedAt?: string;
 }
 
@@ -60,6 +61,24 @@ export interface FilePayload {
   file: FileEntry;
   content?: string;
   url?: string;
+}
+
+export interface TabInfo {
+  key: string;
+  label: string;
+  count: number;
+  description: string;
+}
+
+export interface StaticSiteData {
+  generatedAt: string;
+  rootName: string;
+  files: FileEntry[];
+  tree: TreeNode[];
+  dashboard: DashboardData;
+  tabs: TabInfo[];
+  payloads: Record<string, FilePayload>;
+  searchText: Record<string, string>;
 }
 
 export interface ApiErrorBody {

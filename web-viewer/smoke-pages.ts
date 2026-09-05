@@ -1,0 +1,22 @@
+import { chromium } from 'playwright';
+import assert from 'node:assert/strict';
+
+const baseURL = process.env.PAGES_PREVIEW_URL || 'http://127.0.0.1:4173/my-wiki/';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const errors: string[] = [];
+page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
+page.on('pageerror', (error) => errors.push(error.message));
+await page.goto(baseURL);
+await page.getByRole('heading', { name: '文件系统即知识库' }).waitFor();
+assert.equal(await page.getByText('公开只读', { exact: true }).first().isVisible(), true);
+assert.equal(await page.getByRole('button', { name: '收藏' }).count(), 0);
+const search = page.getByPlaceholder(/搜索文件名与正文/);
+await search.fill('Mooncake');
+await page.getByText(/找到 \d+ 条与「Mooncake」/).waitFor();
+await page.getByRole('button', { name: /Mooncake 论文摘要/ }).first().click();
+await page.locator('a.wiki-link').first().click();
+await page.locator('.preview-body .markdown-body').waitFor();
+assert.deepEqual(errors, []);
+console.log('Pages static smoke passed.');
+await browser.close();
