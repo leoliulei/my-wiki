@@ -11,3 +11,7 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Web 查看端构建产物
+web-viewer/node_modules/
+web-viewer/dist/

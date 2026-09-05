@@ -1,0 +1,33 @@
+import { chromium } from 'playwright';
+import assert from 'node:assert/strict';
+import path from 'node:path';
+
+const baseURL = 'http://127.0.0.1:4317';
+const screenshotDir = path.resolve('../docs/images');
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
+const errors: string[] = [];
+page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
+page.on('pageerror', (error) => errors.push(error.message));
+await page.goto(baseURL);
+await page.getByRole('heading', { name: '文件系统即知识库' }).waitFor();
+assert.equal(await page.getByText('raw 不可变原始资料 · wiki 可再生理解层 · inbox 暂存待整理。浏览器直接读取本地 Markdown、HTML、PDF 与图片。').isVisible(), true);
+await page.screenshot({ path: path.join(screenshotDir, 'web-viewer-home.png'), fullPage: true });
+
+const search = page.getByPlaceholder('搜索文件名与正文（含暂存区）');
+await search.fill('Mooncake');
+await page.getByText(/找到 \d+ 条与「Mooncake」/).waitFor();
+await page.getByRole('button', { name: /Mooncake 论文摘要/ }).first().click();
+await page.getByRole('heading', { name: 'Mooncake 论文摘要 — 以 KVCache 为中心的 LLM 推理分离架构', exact: true }).waitFor();
+await search.fill('');
+const wikiLink = page.locator('a.wiki-link').first();
+assert.ok(await wikiLink.count(), '文章应包含可点击的 wiki-link');
+await wikiLink.click();
+await page.getByText('侧栏预览').waitFor();
+assert.equal(await page.getByText('页面不存在').count(), 0, '已有实体的短标题应能解析到对应页面');
+await page.locator('.preview-body .markdown-body').waitFor();
+assert.equal(await page.getByText('无法预览').count(), 0, 'Markdown 实体应在侧栏渲染');
+await page.screenshot({ path: path.join(screenshotDir, 'web-viewer-reading.png'), fullPage: true });
+assert.deepEqual(errors, []);
+console.log('UI smoke test passed; screenshots updated.');
+await browser.close();
