@@ -53,16 +53,53 @@ cd my-wiki
 
 ### 2. 启动 Web 查看端
 
+仓库根目录提供了一键部署启动脚本，会检查 Node.js 版本、按锁文件安装依赖、完成生产构建并以前台方式启动服务：
+
+```bash
+./scripts/start-local.sh --open
+```
+
+默认访问 `http://127.0.0.1:4317`。不需要自动打开浏览器时省略 `--open`；依赖未变化的重复启动可使用 `--skip-install`，也可以通过 `--port 4318` 指定其他端口。
+
+仍可手动执行：
+
 ```bash
 cd web-viewer
-npm install
+npm ci
 npm run build
 npm start
 ```
 
-应用会自动打开 `http://127.0.0.1:4317`。服务默认只监听本机回环地址，不对局域网或公网暴露。
+服务默认只监听本机回环地址，不对局域网或公网暴露。
 
-开发模式：
+### 3. macOS 后台运行
+
+使用 `launchd` 安装为当前用户的后台服务，登录后自动运行；无需 `sudo`：
+
+```bash
+./scripts/macos-service.sh install
+```
+
+安装过程会自动执行 `npm ci` 和生产构建，然后写入 `~/Library/LaunchAgents/io.github.leoliulei.my-wiki.plist`。常用管理命令：
+
+```bash
+./scripts/macos-service.sh status     # 查看安装、进程和 HTTP 健康状态
+./scripts/macos-service.sh restart    # 重启服务
+./scripts/macos-service.sh stop       # 停止，保留登录自启配置
+./scripts/macos-service.sh start      # 再次启动
+./scripts/macos-service.sh logs       # 持续查看标准输出和错误日志
+./scripts/macos-service.sh uninstall  # 停止并删除 LaunchAgent 配置
+```
+
+自定义端口只需在安装时指定：
+
+```bash
+./scripts/macos-service.sh install --port 4318
+```
+
+服务日志保存在 `~/Library/Logs/my-wiki/`。代码或依赖更新后，再运行一次 `install` 即可重新构建并替换后台服务配置。
+
+### 4. 开发模式
 
 ```bash
 cd web-viewer
@@ -103,7 +140,7 @@ Web 查看端并不复制知识库数据，而是直接扫描仓库中的 `inbox
 | 扫描本地 `inbox/`、`raw/`、`wiki/` | 只导出 Git 已追踪的 `raw/` 和 `wiki/` |
 | 支持编辑、收藏、上传、归档和网址抓取 | 强制只读，不包含写接口和 Express 服务 |
 | 可查看本机尚未提交的资料 | 不发布未提交文件，默认不发布 `inbox/` |
-| `npm start` 启动 | 推送到 `main` 后由 Actions 自动部署 |
+| `./scripts/start-local.sh` 或 `npm start` 启动 | 推送到 `main` 后由 Actions 自动部署 |
 
 首次使用时，在 GitHub 仓库的 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**。后续工作流会自动完成构建与发布。
 
@@ -211,6 +248,9 @@ my-wiki/
 │   ├── synthesis/            # 问答与观点归档
 │   ├── _index.md             # 全库索引
 │   └── _log.md               # 操作日志
+├── scripts/
+│   ├── start-local.sh        # 一键安装、构建和前台启动
+│   └── macos-service.sh      # macOS launchd 后台服务管理
 └── web-viewer/
     ├── client/               # React + Vite 前端
     ├── server/               # Express 文件系统 API
@@ -265,7 +305,8 @@ npm run build      # 生产构建 + 类型检查
 npm run test:ui    # 本地完整模式浏览器烟测并更新 README 截图
 npm run build:pages # 导出 Git 已追踪内容并生成 Pages 静态站点
 npm run test:pages # 验证 /my-wiki/ 子路径下的静态只读模式
-npm start          # 启动生产构建
+npm start          # 启动生产构建并打开浏览器
+npm run start:server # 启动生产服务但不打开浏览器（后台服务使用）
 ```
 
 完整交付前建议执行：

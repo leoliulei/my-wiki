@@ -11,6 +11,7 @@
     "dev:server": "tsx watch server/src/index.ts",
     "dev:client": "vite --host 127.0.0.1 client",
     "start": "tsx server/src/index.ts --open",
+    "start:server": "tsx server/src/index.ts",
     "build": "npm run build:client && npm run typecheck",
     "build:client": "vite build client",
     "build:pages": "tsx scripts/generate-static.ts && VITE_STATIC_MODE=true vite build client",
