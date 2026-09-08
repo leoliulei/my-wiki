@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 680" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <title>渐进升值如何同时服务北京三大目标</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <text x="450" y="34" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a1a1a">渐进升值如何同时服务北京三大目标</text>
+  <text x="450" y="58" text-anchor="middle" font-size="13" fill="#555">机制示意：箭头表示作用方向；数值口径见高盛研报（2026-09-02）</text>
+
+  <!-- three goal boxes -->
+  <g>
+    <rect x="40" y="88" width="250" height="118" rx="10" fill="#2b579a"/>
+    <text x="165" y="120" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">目标① 制造业与自主可控</text>
+    <text x="165" y="148" text-anchor="middle" font-size="13" fill="#eaf1fb">全球制造业份额继续上升</text>
+    <text x="165" y="170" text-anchor="middle" font-size="13" fill="#eaf1fb">关键投入与技术"自主可控"</text>
+    <text x="165" y="192" text-anchor="middle" font-size="12" fill="#c5d6f2">对外：缓解关税压力</text>
+  </g>
+  <g>
+    <rect x="325" y="88" width="250" height="118" rx="10" fill="#2b579a"/>
+    <text x="450" y="120" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">目标② 人民币国际化</text>
+    <text x="450" y="148" text-anchor="middle" font-size="13" fill="#eaf1fb">降低对美元制裁的脆弱性</text>
+    <text x="450" y="170" text-anchor="middle" font-size="13" fill="#eaf1fb">债券市场国际化加速</text>
+    <text x="450" y="192" text-anchor="middle" font-size="12" fill="#c5d6f2">升值预期抵消负利差</text>
+  </g>
+  <g>
+    <rect x="610" y="88" width="250" height="118" rx="10" fill="#2b579a"/>
+    <text x="735" y="120" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">目标③ 名义 GDP 追赶美国</text>
+    <text x="735" y="148" text-anchor="middle" font-size="13" fill="#eaf1fb">美元计价、市场汇率口径</text>
+    <text x="735" y="170" text-anchor="middle" font-size="13" fill="#eaf1fb">名义增速放缓下的追赶路径</text>
+    <text x="735" y="192" text-anchor="middle" font-size="12" fill="#c5d6f2">象征意义大于经济意义</text>
+  </g>
+
+  <!-- arrows from goals to policy box -->
+  <line x1="165" y1="206" x2="290" y2="300" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="450" y1="206" x2="450" y2="300" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="735" y1="206" x2="610" y2="300" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- policy choice box -->
+  <rect x="240" y="308" width="420" height="86" rx="12" fill="#ffd966" stroke="#b45309" stroke-width="2"/>
+  <text x="450" y="344" text-anchor="middle" font-size="19" font-weight="bold" fill="#7a4a00">渐进升值：对美元 3%—5%/年</text>
+  <text x="450" y="372" text-anchor="middle" font-size="13" fill="#8a5a10">三目标同时受益 · 与远期定价一致 · 简化汇率管理</text>
+
+  <!-- arrows: policy to conditions -->
+  <line x1="450" y1="394" x2="280" y2="472" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="450" y1="394" x2="620" y2="472" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- condition boxes -->
+  <rect x="80" y="480" width="340" height="84" rx="10" fill="#f2f2f2" stroke="#666" stroke-width="1.5"/>
+  <text x="250" y="512" text-anchor="middle" font-size="15" font-weight="bold" fill="#333">条件① 美元整体走弱</text>
+  <text x="250" y="536" text-anchor="middle" font-size="13" fill="#555">broad USD TWI 预计每年贬值约 1%</text>
+  <text x="250" y="556" text-anchor="middle" font-size="12" fill="#777">人民币随美元对多数货币同步走强</text>
+
+  <rect x="480" y="480" width="340" height="84" rx="10" fill="#f2f2f2" stroke="#666" stroke-width="1.5"/>
+  <text x="650" y="512" text-anchor="middle" font-size="15" font-weight="bold" fill="#333">条件② 中国通胀低于伙伴</text>
+  <text x="650" y="536" text-anchor="middle" font-size="13" fill="#555">未来数年至少低 1 个百分点</text>
+  <text x="650" y="556" text-anchor="middle" font-size="12" fill="#777">2022—25 年实际汇率已大幅贬值</text>
+
+  <!-- arrows: conditions to outcome -->
+  <line x1="250" y1="564" x2="390" y2="612" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="650" y1="564" x2="510" y2="612" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- outcome box -->
+  <rect x="210" y="612" width="480" height="56" rx="12" fill="#d9ead3" stroke="#38761d" stroke-width="2"/>
+  <text x="450" y="636" text-anchor="middle" font-size="16" font-weight="bold" fill="#274e13">实际有效汇率（real TWI）基本稳定 → 竞争力与份额保持</text>
+  <text x="450" y="658" text-anchor="middle" font-size="13" fill="#38761d">"既要又要"成立：低估约 20%，5%/年升值四年仅消化一半</text>
+
+  <!-- contrast box -->
+  <rect x="700" y="308" width="180" height="176" rx="10" fill="#fbe5d6" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="790" y="336" text-anchor="middle" font-size="14" font-weight="bold" fill="#a93226">对照：快速升值</text>
+  <text x="790" y="364" text-anchor="middle" font-size="12" fill="#a93226">最终削弱国际竞争力</text>
+  <text x="790" y="386" text-anchor="middle" font-size="12" fill="#a93226">拖慢出口与实际 GDP</text>
+  <text x="790" y="408" text-anchor="middle" font-size="12" fill="#a93226">侵蚀目标①</text>
+  <text x="790" y="442" text-anchor="middle" font-size="11" fill="#c0392b">（不构成本报告的推荐路径）</text>
+
+  <text x="450" y="676" text-anchor="middle" font-size="0" fill="none"> </text>
+</svg>

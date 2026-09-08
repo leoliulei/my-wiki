@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Fireworks AI 的平台价值链、护城河与风险</title>
+  <desc id="desc">展示企业模型需求经过 Fireworks AI 适配和推理运行时，最终形成生产级交付，同时受到开源商品化、云厂商捆绑、GPU 依赖和客户集中等风险挤压。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#66818F"/>
+    </marker>
+    <marker id="riskArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#B06455"/>
+    </marker>
+    <style>
+      .title{font:700 27px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#17202A}
+      .sub{font:400 15px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#5F6772}
+      .head{font:700 18px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#1D2933}
+      .body{font:400 15px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#3E4851}
+      .small{font:400 13px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#66707A}
+      .risk{font:600 15px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#7A3F34}
+      .take{font:700 18px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#263238}
+    </style>
+  </defs>
+  <rect x="1" y="1" width="1198" height="718" rx="18" fill="#FAFAF7" stroke="#E3E3DD" stroke-width="2"/>
+  <text x="48" y="56" class="title">Fireworks AI 的平台价值链、护城河与风险</text>
+  <text x="48" y="86" class="sub">结构示意：平台试图把单点推理 API 扩展为“企业模型的生产运行时”；箭头表示产品与价值传递。</text>
+
+  <!-- value chain -->
+  <rect x="48" y="130" width="245" height="270" rx="16" fill="#FFFFFF" stroke="#BFD5DF" stroke-width="2"/>
+  <text x="72" y="168" class="head">企业模型需求</text>
+  <line x1="72" y1="184" x2="269" y2="184" stroke="#D9E5EA"/>
+  <text x="72" y="220" class="body">• 开源 / 私有模型选择</text>
+  <text x="72" y="253" class="body">• 企业数据与领域适配</text>
+  <text x="72" y="286" class="body">• 延迟、吞吐、成本约束</text>
+  <text x="72" y="319" class="body">• 多区域与治理需求</text>
+  <text x="72" y="365" class="small">需求从“调用通用模型”转向</text>
+  <text x="72" y="386" class="small">“构建并运行自己的智能”</text>
+
+  <line x1="307" y1="265" x2="356" y2="265" stroke="#66818F" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <rect x="373" y="112" width="454" height="306" rx="18" fill="#F0F7FA" stroke="#74AFC5" stroke-width="3"/>
+  <text x="400" y="151" class="head">Fireworks AI：适配层 + 推理运行时</text>
+  <line x1="400" y1="168" x2="800" y2="168" stroke="#C7DEE7"/>
+
+  <rect x="400" y="190" width="186" height="88" rx="12" fill="#FFFFFF" stroke="#BCD5DF"/>
+  <text x="418" y="219" class="body" font-weight="700">模型适配</text>
+  <text x="418" y="246" class="small">微调 / RL · Multi-LoRA</text>
+  <text x="418" y="267" class="small">1000+ 模型 · 日 0 支持</text>
+
+  <rect x="614" y="190" width="186" height="88" rx="12" fill="#FFFFFF" stroke="#BCD5DF"/>
+  <text x="632" y="219" class="body" font-weight="700">推理优化</text>
+  <text x="632" y="246" class="small">FireAttention / Optimizer</text>
+  <text x="632" y="267" class="small">缓存 · 投机解码 · 连续批处理</text>
+
+  <rect x="400" y="300" width="186" height="88" rx="12" fill="#FFFFFF" stroke="#BCD5DF"/>
+  <text x="418" y="329" class="body" font-weight="700">资源形态</text>
+  <text x="418" y="356" class="small">Serverless · 专用 GPU</text>
+  <text x="418" y="377" class="small">预留容量 · BYOC</text>
+
+  <rect x="614" y="300" width="186" height="88" rx="12" fill="#FFFFFF" stroke="#BCD5DF"/>
+  <text x="632" y="329" class="body" font-weight="700">能力扩张</text>
+  <text x="632" y="356" class="small">Training API · Voice Agent</text>
+  <text x="632" y="377" class="small">多模态 · 企业治理</text>
+
+  <line x1="841" y1="265" x2="890" y2="265" stroke="#66818F" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <rect x="907" y="130" width="245" height="270" rx="16" fill="#FFFFFF" stroke="#BFD5DF" stroke-width="2"/>
+  <text x="931" y="168" class="head">生产级交付</text>
+  <line x1="931" y1="184" x2="1128" y2="184" stroke="#D9E5EA"/>
+  <text x="931" y="220" class="body">• 托管部署与弹性扩缩</text>
+  <text x="931" y="253" class="body">• 性能、成本与稳定性</text>
+  <text x="931" y="286" class="body">• 客户定制模型运行</text>
+  <text x="931" y="319" class="body">• API 到一站式运行时</text>
+  <text x="931" y="365" class="small">95% Token 来自客户定制模型</text>
+  <text x="931" y="386" class="small">体现平台粘性，而非纯转售</text>
+
+  <!-- risk pressure -->
+  <rect x="48" y="464" width="1104" height="144" rx="16" fill="#FFF6F2" stroke="#D7A89B" stroke-width="2"/>
+  <text x="72" y="500" class="head" fill="#7A3F34">四类结构性风险向平台层施压</text>
+  <rect x="72" y="522" width="232" height="58" rx="10" fill="#FFFFFF" stroke="#E3BDB3"/>
+  <text x="188" y="557" text-anchor="middle" class="risk">开源商品化：vLLM / SGLang</text>
+  <rect x="326" y="522" width="232" height="58" rx="10" fill="#FFFFFF" stroke="#E3BDB3"/>
+  <text x="442" y="557" text-anchor="middle" class="risk">云厂商捆绑：Bedrock 等</text>
+  <rect x="580" y="522" width="232" height="58" rx="10" fill="#FFFFFF" stroke="#E3BDB3"/>
+  <text x="696" y="557" text-anchor="middle" class="risk">GPU 供应与英伟达依赖</text>
+  <rect x="834" y="522" width="294" height="58" rx="10" fill="#FFFFFF" stroke="#E3BDB3"/>
+  <text x="981" y="557" text-anchor="middle" class="risk">客户集中：Cursor 曾约占一半收入</text>
+  <line x1="600" y1="464" x2="600" y2="430" stroke="#B06455" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#riskArrow)"/>
+
+  <line x1="48" y1="644" x2="1152" y2="644" stroke="#DDDCD6" stroke-width="2"/>
+  <text x="48" y="682" class="take">核心判断：护城河不只在单次推理速度，而在模型适配、运行优化、部署治理形成的迁移成本。</text>
+  <text x="1152" y="682" text-anchor="end" class="small">来源：本库 Fireworks AI 原始调研；本图为结构示意</text>
+</svg>

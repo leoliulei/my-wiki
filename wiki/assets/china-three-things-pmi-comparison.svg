@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="610" viewBox="0 0 1200 610" role="img" aria-labelledby="title desc">
+  <title id="title">2026 年 8 月中国官方 PMI 对比</title>
+  <desc id="desc">比较制造业、服务业和建筑业 PMI 的前值与 8 月值，三项指标均低于 50 荣枯线。</desc>
+  <defs>
+    <style>
+      .title{font:700 27px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#17202A}
+      .sub{font:400 15px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#5F6772}
+      .axis{font:400 14px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#59636E}
+      .label{font:600 16px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#27313A}
+      .value{font:700 17px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#263238}
+      .note{font:400 13px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#68717B}
+      .take{font:700 18px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#263238}
+    </style>
+  </defs>
+  <rect x="1" y="1" width="1198" height="608" rx="18" fill="#FAFAF7" stroke="#E3E3DD" stroke-width="2"/>
+  <text x="52" y="56" class="title">2026 年 8 月中国官方 PMI：边际变化与景气区间</text>
+  <text x="52" y="86" class="sub">制造业回升，服务业持平，建筑业回落；三项指标均未越过 50 荣枯线。</text>
+
+  <rect x="52" y="118" width="1096" height="348" rx="14" fill="#FFFFFF" stroke="#E6E6E0"/>
+
+  <!-- chart grid: y 46 to 51 -->
+  <g stroke="#E7E9EA" stroke-width="1">
+    <line x1="130" y1="414" x2="1090" y2="414"/>
+    <line x1="130" y1="358" x2="1090" y2="358"/>
+    <line x1="130" y1="302" x2="1090" y2="302"/>
+    <line x1="130" y1="246" x2="1090" y2="246"/>
+    <line x1="130" y1="190" x2="1090" y2="190"/>
+    <line x1="130" y1="134" x2="1090" y2="134"/>
+  </g>
+  <line x1="130" y1="190" x2="1090" y2="190" stroke="#B35D52" stroke-width="3" stroke-dasharray="10 7"/>
+  <text x="1082" y="180" text-anchor="end" class="axis" fill="#8A4038">50 荣枯线</text>
+
+  <line x1="130" y1="134" x2="130" y2="414" stroke="#77818B" stroke-width="1.5"/>
+  <line x1="130" y1="414" x2="1090" y2="414" stroke="#77818B" stroke-width="1.5"/>
+  <text x="110" y="419" text-anchor="end" class="axis">46</text>
+  <text x="110" y="363" text-anchor="end" class="axis">47</text>
+  <text x="110" y="307" text-anchor="end" class="axis">48</text>
+  <text x="110" y="251" text-anchor="end" class="axis">49</text>
+  <text x="110" y="195" text-anchor="end" class="axis">50</text>
+  <text x="110" y="139" text-anchor="end" class="axis">51</text>
+
+  <!-- manufacturing -->
+  <rect x="220" y="234.8" width="62" height="179.2" rx="6" fill="#C7D5DC"/>
+  <rect x="296" y="201.2" width="62" height="212.8" rx="6" fill="#4E9BB8"/>
+  <text x="251" y="225" text-anchor="middle" class="value">49.2</text>
+  <text x="327" y="191" text-anchor="middle" class="value">49.8</text>
+  <text x="289" y="447" text-anchor="middle" class="label">制造业</text>
+  <text x="289" y="474" text-anchor="middle" class="axis" fill="#2D6C82">+0.6 点</text>
+
+  <!-- services -->
+  <rect x="520" y="229.2" width="62" height="184.8" rx="6" fill="#C7D5DC"/>
+  <rect x="596" y="229.2" width="62" height="184.8" rx="6" fill="#D39B54"/>
+  <text x="551" y="219" text-anchor="middle" class="value">49.3</text>
+  <text x="627" y="219" text-anchor="middle" class="value">49.3</text>
+  <text x="589" y="447" text-anchor="middle" class="label">服务业</text>
+  <text x="589" y="474" text-anchor="middle" class="axis" fill="#8A5A20">持平</text>
+
+  <!-- construction -->
+  <rect x="820" y="358" width="62" height="56" rx="6" fill="#C7D5DC"/>
+  <rect x="896" y="363.6" width="62" height="50.4" rx="6" fill="#BE7466"/>
+  <text x="851" y="348" text-anchor="middle" class="value">47.0</text>
+  <text x="927" y="354" text-anchor="middle" class="value">46.9</text>
+  <text x="889" y="447" text-anchor="middle" class="label">建筑业</text>
+  <text x="889" y="474" text-anchor="middle" class="axis" fill="#8A4038">−0.1 点</text>
+
+  <!-- legend -->
+  <rect x="52" y="507" width="18" height="18" rx="3" fill="#C7D5DC"/>
+  <text x="80" y="521" class="axis">7 月 / 前值</text>
+  <rect x="184" y="507" width="18" height="18" rx="3" fill="#4E9BB8"/>
+  <text x="212" y="521" class="axis">8 月值（颜色区分行业）</text>
+  <text x="52" y="566" class="take">结论：制造业只是收缩放缓；服务业缺乏改善；建筑业仍是最弱项。</text>
+  <text x="1148" y="590" text-anchor="end" class="note">来源：原报告转述的中国国家统计局数据；纵轴从 46 起，仅用于突出点位变化。</text>
+</svg>

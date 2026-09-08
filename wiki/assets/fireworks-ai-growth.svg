@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Fireworks AI 规模增长快照</title>
+  <desc id="desc">展示 2025 年 12 月至 2026 年 7 月 Fireworks AI 年化收入和日处理 Token 的研究口径快照。</desc>
+  <defs>
+    <style>
+      .title{font:700 27px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#17202A}
+      .sub{font:400 15px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#5F6772}
+      .axis{font:400 13px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#59636E}
+      .label{font:600 14px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#27313A}
+      .valueA{font:700 16px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#176B87}
+      .valueT{font:700 16px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#8A5A20}
+      .note{font:400 13px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#68717B}
+    </style>
+  </defs>
+  <rect x="1" y="1" width="1198" height="618" rx="18" fill="#FAFAF7" stroke="#E3E3DD" stroke-width="2"/>
+  <text x="52" y="57" class="title">Fireworks AI 规模增长快照</text>
+  <text x="52" y="87" class="sub">双轴展示：左轴为年化收入 ARR（亿美元），右轴为日处理 Token（万亿）；均来自原始调研整理。</text>
+
+  <rect x="52" y="116" width="1096" height="390" rx="14" fill="#FFFFFF" stroke="#E6E6E0"/>
+
+  <!-- horizontal grid -->
+  <g stroke="#E7E9EA" stroke-width="1">
+    <line x1="132" y1="436" x2="1068" y2="436"/>
+    <line x1="132" y1="366" x2="1068" y2="366"/>
+    <line x1="132" y1="296" x2="1068" y2="296"/>
+    <line x1="132" y1="226" x2="1068" y2="226"/>
+    <line x1="132" y1="156" x2="1068" y2="156"/>
+  </g>
+
+  <!-- axes -->
+  <line x1="132" y1="156" x2="132" y2="436" stroke="#77818B" stroke-width="1.5"/>
+  <line x1="1068" y1="156" x2="1068" y2="436" stroke="#77818B" stroke-width="1.5"/>
+  <line x1="132" y1="436" x2="1068" y2="436" stroke="#77818B" stroke-width="1.5"/>
+
+  <!-- left labels ARR 0-12 -->
+  <text x="112" y="441" text-anchor="end" class="axis">0</text>
+  <text x="112" y="371" text-anchor="end" class="axis">3</text>
+  <text x="112" y="301" text-anchor="end" class="axis">6</text>
+  <text x="112" y="231" text-anchor="end" class="axis">9</text>
+  <text x="112" y="161" text-anchor="end" class="axis">12</text>
+  <text x="64" y="139" class="label" fill="#176B87">ARR（亿美元）</text>
+
+  <!-- right labels token 0-48 -->
+  <text x="1088" y="441" class="axis">0</text>
+  <text x="1088" y="371" class="axis">12</text>
+  <text x="1088" y="301" class="axis">24</text>
+  <text x="1088" y="231" class="axis">36</text>
+  <text x="1088" y="161" class="axis">48</text>
+  <text x="1008" y="139" class="label" fill="#8A5A20">Token（万亿/日）</text>
+
+  <!-- x labels -->
+  <text x="190" y="472" text-anchor="middle" class="axis">2025-12</text>
+  <text x="478" y="472" text-anchor="middle" class="axis">2026-02</text>
+  <text x="766" y="472" text-anchor="middle" class="axis">2026-05</text>
+  <text x="1010" y="472" text-anchor="middle" class="axis">2026-07</text>
+
+  <!-- ARR line: scale 23.333 px per $1B -->
+  <polyline points="190,365 478,362.5 766,249.3 1010,202.7" fill="none" stroke="#2C91B4" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <g fill="#FFFFFF" stroke="#2C91B4" stroke-width="4">
+    <circle cx="190" cy="365" r="8"/><circle cx="478" cy="362.5" r="8"/><circle cx="766" cy="249.3" r="8"/><circle cx="1010" cy="202.7" r="8"/>
+  </g>
+  <text x="190" y="344" text-anchor="middle" class="valueA">$3.05亿</text>
+  <text x="478" y="341" text-anchor="middle" class="valueA">$3.15亿</text>
+  <text x="766" y="228" text-anchor="middle" class="valueA">约 $8亿</text>
+  <text x="1010" y="181" text-anchor="middle" class="valueA">$10亿+</text>
+
+  <!-- Token line: scale 5.833 px per trillion -->
+  <polyline points="190,348.5 478,331 766,272.7 1010,202.7" fill="none" stroke="#D18A32" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="10 7"/>
+  <g fill="#FFFFFF" stroke="#D18A32" stroke-width="4">
+    <rect x="183" y="341.5" width="14" height="14" rx="2"/><rect x="471" y="324" width="14" height="14" rx="2"/><rect x="759" y="265.7" width="14" height="14" rx="2"/><rect x="1003" y="195.7" width="14" height="14" rx="2"/>
+  </g>
+  <text x="190" y="400" text-anchor="middle" class="valueT">约 15万亿</text>
+  <text x="478" y="310" text-anchor="middle" class="valueT">约 18万亿</text>
+  <text x="766" y="302" text-anchor="middle" class="valueT">约 28万亿</text>
+  <text x="1010" y="232" text-anchor="middle" class="valueT">40万亿+</text>
+
+  <!-- legend and takeaway -->
+  <line x1="55" y1="543" x2="91" y2="543" stroke="#2C91B4" stroke-width="5"/>
+  <circle cx="73" cy="543" r="6" fill="#FFFFFF" stroke="#2C91B4" stroke-width="3"/>
+  <text x="103" y="548" class="axis">ARR</text>
+  <line x1="175" y1="543" x2="211" y2="543" stroke="#D18A32" stroke-width="5" stroke-dasharray="9 6"/>
+  <rect x="187" y="537" width="12" height="12" rx="2" fill="#FFFFFF" stroke="#D18A32" stroke-width="3"/>
+  <text x="223" y="548" class="axis">日处理 Token</text>
+  <text x="410" y="548" class="label">期内下限倍数：ARR ≥3.3×；Token ≥2.7×</text>
+  <text x="52" y="588" class="note">口径说明：“约”与“+”按原始调研保留；折线连接的是离散披露/估算快照，不代表连续月度观测或审计财务序列。</text>
+</svg>

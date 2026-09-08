@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 480" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <title>中国宏观主题地图</title>
+  <defs>
+    <marker id="m-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a8a8a"/>
+    </marker>
+  </defs>
+
+  <text x="420" y="32" text-anchor="middle" font-size="21" font-weight="bold" fill="#1a1a1a">中国宏观主题地图</text>
+  <text x="420" y="56" text-anchor="middle" font-size="13" fill="#555">Goldman Sachs 视角 · 当前 2 篇资料</text>
+
+  <!-- source boxes (left) -->
+  <rect x="30" y="92" width="250" height="96" rx="10" fill="#eef3fb" stroke="#2b579a" stroke-width="1.5"/>
+  <text x="155" y="118" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f4e79">Three things in China</text>
+  <text x="155" y="140" text-anchor="middle" font-size="12" fill="#333">2026-09-06</text>
+  <text x="155" y="162" text-anchor="middle" font-size="12" fill="#444">PMI 分化 · 外贸 · 通胀 · 汇率观点</text>
+  <text x="155" y="180" text-anchor="middle" font-size="11" fill="#777">作者：Hui Shan</text>
+
+  <rect x="30" y="292" width="250" height="96" rx="10" fill="#fdf3e3" stroke="#b45309" stroke-width="1.5"/>
+  <text x="155" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#7a4a00">Asia in Focus</text>
+  <text x="155" y="340" text-anchor="middle" font-size="12" fill="#333">2026-09-02</text>
+  <text x="155" y="362" text-anchor="middle" font-size="12" fill="#444">贸易失衡 · 三目标 · 渐进升值 · USDCNY</text>
+  <text x="155" y="380" text-anchor="middle" font-size="11" fill="#777">作者：Andrew Tilton · Hui Shan</text>
+
+  <!-- center node -->
+  <rect x="330" y="205" width="180" height="70" rx="35" fill="#2b579a"/>
+  <text x="420" y="238" text-anchor="middle" font-size="19" font-weight="bold" fill="#fff">中国宏观</text>
+  <text x="420" y="260" text-anchor="middle" font-size="12" fill="#cfe0f7">2 篇资料 · 均出自 GS</text>
+
+  <!-- edges: sources to center -->
+  <line x1="280" y1="160" x2="330" y2="228" stroke="#8a8a8a" stroke-width="1.5" marker-end="url(#m-arrow)"/>
+  <line x1="280" y1="360" x2="330" y2="252" stroke="#8a8a8a" stroke-width="1.5" marker-end="url(#m-arrow)"/>
+
+  <!-- theme nodes (right) -->
+  <g text-anchor="middle">
+    <rect x="580" y="66" width="220" height="52" rx="26" fill="#d9ead3" stroke="#38761d" stroke-width="1.5"/>
+    <text x="690" y="98" font-size="14" font-weight="bold" fill="#274e13">增长与 PMI</text>
+
+    <rect x="580" y="146" width="220" height="52" rx="26" fill="#d9ead3" stroke="#38761d" stroke-width="1.5"/>
+    <text x="690" y="178" font-size="14" font-weight="bold" fill="#274e13">外贸与失衡</text>
+
+    <rect x="580" y="226" width="220" height="52" rx="26" fill="#d9ead3" stroke="#38761d" stroke-width="1.5"/>
+    <text x="690" y="258" font-size="14" font-weight="bold" fill="#274e13">通胀（CPI / PPI）</text>
+
+    <rect x="580" y="306" width="220" height="52" rx="26" fill="#d9ead3" stroke="#38761d" stroke-width="1.5"/>
+    <text x="690" y="338" font-size="14" font-weight="bold" fill="#274e13">人民币汇率</text>
+  </g>
+
+  <!-- edges: center to themes -->
+  <line x1="510" y1="235" x2="580" y2="95" stroke="#8a8a8a" stroke-width="1.5" marker-end="url(#m-arrow)"/>
+  <line x1="510" y1="240" x2="580" y2="175" stroke="#8a8a8a" stroke-width="1.5" marker-end="url(#m-arrow)"/>
+  <line x1="510" y1="245" x2="580" y2="255" stroke="#8a8a8a" stroke-width="1.5" marker-end="url(#m-arrow)"/>
+  <line x1="510" y1="250" x2="580" y2="335" stroke="#8a8a8a" stroke-width="1.5" marker-end="url(#m-arrow)"/>
+
+  <text x="420" y="440" text-anchor="middle" font-size="12" fill="#888">共同主线：外需强、内需弱的分化格局；人民币渐进升值是两篇资料共同的政策主题</text>
+</svg>

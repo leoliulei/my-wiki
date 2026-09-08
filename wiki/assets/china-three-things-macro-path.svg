@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">2026 年 8 月中国宏观：分化格局与验证路径</title>
+  <desc id="desc">已公布的制造业边际改善、服务业和建筑业偏弱，以及待验证的外贸和价格预测。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#78909C"/>
+    </marker>
+    <style>
+      .title { font: 700 26px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #1A1B1C; }
+      .subtitle { font: 400 15px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #5F6772; }
+      .step { font: 700 16px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .metric { font: 700 22px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #1A1B1C; }
+      .body { font: 400 16px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #414852; }
+      .conclusion { font: 700 18px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #263238; }
+    </style>
+  </defs>
+
+  <rect x="1" y="1" width="1198" height="498" rx="18" fill="#F8F8F5" stroke="#E4E3DD" stroke-width="2"/>
+  <text x="42" y="54" class="title">2026 年 8 月中国宏观：分化格局与验证路径</text>
+  <text x="42" y="84" class="subtitle">阅读方向：已公布状态 → 机构解释 → 待验证变量；箭头表示分析推进，不代表已经证实的因果。</text>
+
+  <rect x="42" y="120" width="320" height="220" rx="15" fill="#FFFFFF" stroke="#B8D2DE" stroke-width="2"/>
+  <rect x="42" y="120" width="320" height="44" rx="15" fill="#E8F3F8"/>
+  <rect x="42" y="149" width="320" height="15" fill="#E8F3F8"/>
+  <text x="64" y="149" class="step" fill="#315A70">① 已公布：生产端边际改善</text>
+  <text x="64" y="207" class="metric">制造业 PMI 49.8</text>
+  <text x="64" y="246" class="body">较 7 月上升 0.6 点，但仍低于 50</text>
+  <text x="64" y="278" class="body">含义：收缩放缓，而非转入扩张</text>
+  <text x="64" y="314" class="subtitle">证据状态：官方数据已公布</text>
+
+  <line x1="378" y1="230" x2="424" y2="230" stroke="#78909C" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="440" y="120" width="320" height="220" rx="15" fill="#FFFFFF" stroke="#D9C5AD" stroke-width="2"/>
+  <rect x="440" y="120" width="320" height="44" rx="15" fill="#F4ECE2"/>
+  <rect x="440" y="149" width="320" height="15" fill="#F4ECE2"/>
+  <text x="462" y="149" class="step" fill="#765735">② 已公布：内需部门偏弱</text>
+  <text x="462" y="207" class="metric">服务业 49.3</text>
+  <text x="462" y="239" class="metric">建筑业 46.9</text>
+  <text x="462" y="278" class="body">服务业没有改善，建筑业继续下行</text>
+  <text x="462" y="314" class="subtitle">判断：宏观复苏缺乏广度</text>
+
+  <line x1="776" y1="230" x2="822" y2="230" stroke="#78909C" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="838" y="120" width="320" height="220" rx="15" fill="#FFFFFF" stroke="#D5A85A" stroke-width="2" stroke-dasharray="8 6"/>
+  <rect x="838" y="120" width="320" height="44" rx="15" fill="#FFF4D8"/>
+  <rect x="838" y="149" width="320" height="15" fill="#FFF4D8"/>
+  <text x="860" y="149" class="step" fill="#7A571D">③ 待验证：外贸与价格</text>
+  <text x="860" y="207" class="metric">贸易增速加快</text>
+  <text x="860" y="239" class="metric">CPI 小幅回升</text>
+  <text x="860" y="278" class="body">高盛基于高频数据的预测</text>
+  <text x="860" y="314" class="subtitle">需等待官方贸易、CPI、PPI 数据确认</text>
+
+  <line x1="42" y1="380" x2="1158" y2="380" stroke="#DDDCD6" stroke-width="2"/>
+  <text x="42" y="423" class="conclusion">分析结论：当前更像“生产端企稳、内需端偏弱、外需待确认”，而不是同步复苏。</text>
+  <text x="42" y="458" class="subtitle">数据来源：原报告转述的国家统计局 PMI；贸易与通胀为高盛预测。图为分析示意。</text>
+</svg>

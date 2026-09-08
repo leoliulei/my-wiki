@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fireworks AI 深度调研报告</title>
+<style>
+  :root{
+    --bg:#f6f7fb;
+    --card:#ffffff;
+    --ink:#1a1b26;
+    --sub:#5b6172;
+    --line:#e6e8f0;
+    --brand:#6d28d9;
+    --brand2:#8b5cf6;
+    --accent:#0ea5e9;
+    --green:#059669;
+    --red:#dc2626;
+    --amber:#d97706;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:28px 20px 60px;}
+  header.hero{
+    background:linear-gradient(135deg,#4c1d95 0%,#6d28d9 45%,#7c3aed 70%,#9333ea 100%);
+    color:#fff;border-radius:var(--radius);padding:36px 32px;margin-bottom:22px;
+  }
+  header.hero .tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:2px 12px;font-size:12px;letter-spacing:.5px;margin-bottom:12px;}
+  header.hero h1{font-size:28px;font-weight:800;letter-spacing:.5px;}
+  header.hero p{color:rgba(255,255,255,.85);font-size:14px;margin-top:8px;max-width:720px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0 26px;}
+  .cards .c{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:14px 16px;}
+  .cards .c .num{font-size:22px;font-weight:800;line-height:1.2;}
+  .cards .c .lab{font-size:12px;color:rgba(255,255,255,.8);margin-top:4px;}
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;margin-bottom:18px;}
+  h2{font-size:19px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  h2 .no{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:8px;background:#ede9fe;color:var(--brand);font-size:13px;flex:none;}
+  h3{font-size:15px;font-weight:700;margin:16px 0 8px;color:#3b3f4e;}
+  p{margin-bottom:10px;color:#33384a;}
+  .muted{color:var(--sub);font-size:13px;}
+  ul{margin:6px 0 12px 20px;}
+  li{margin-bottom:6px;}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0;}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4f3fb;font-weight:700;white-space:nowrap;}
+  tr:nth-child(even) td{background:#fafafd;}
+  .pill{display:inline-block;border-radius:999px;padding:1px 10px;font-size:12px;font-weight:600;}
+  .pill.green{background:#ecfdf5;color:var(--green);}
+  .pill.red{background:#fef2f2;color:var(--red);}
+  .pill.amber{background:#fffbeb;color:var(--amber);}
+  .pill.blue{background:#eff6ff;color:var(--accent);}
+  .pill.purple{background:#f5f3ff;color:var(--brand);}
+  .kpi-row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;}
+  .kpi{flex:1 1 140px;background:#fafafd;border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .kpi .n{font-size:20px;font-weight:800;color:var(--brand);}
+  .kpi .t{font-size:12px;color:var(--sub);}
+  .barchart{margin:14px 0;}
+  .bar-row{display:grid;grid-template-columns:120px 1fr 80px;align-items:center;gap:10px;margin:9px 0;font-size:13px;}
+  .bar-row .lbl{color:#3b3f4e;font-weight:600;}
+  .bar-track{background:#f0f1f7;border-radius:6px;height:22px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:11px;font-weight:700;min-width:0;}
+  .timeline{position:relative;margin:16px 0 8px;padding-left:22px;border-left:2px solid #ddd6fe;}
+  .tl-item{position:relative;margin-bottom:16px;}
+  .tl-item:before{content:"";position:absolute;left:-28px;top:4px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--brand);}
+  .tl-item .date{font-size:12.5px;font-weight:700;color:var(--brand);}
+  .tl-item .what{font-size:14px;}
+  .tl-item .det{font-size:12.5px;color:var(--sub);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr;}}
+  .box{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fafafd;margin-bottom:12px;}
+  .box.bull{border-left:4px solid var(--green);}
+  .box.bear{border-left:4px solid var(--red);}
+  .box h4{font-size:14px;margin-bottom:6px;}
+  .callout{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:10px;padding:14px 16px;font-size:13.5px;color:#4c3a86;margin:12px 0;}
+  .callout b{color:var(--brand);}
+  footer{color:var(--sub);font-size:12.5px;margin-top:10px;}
+  footer .src{word-break:break-all;}
+  .chip{display:inline-block;background:#f0f1f7;border-radius:8px;padding:3px 10px;font-size:12.5px;margin:3px 3px 0 0;color:#3b3f4e;}
+  .note{font-size:12px;color:var(--sub);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="tag">深度调研 · 2026-09</span>
+    <h1>Fireworks AI 公司、业务与前景</h1>
+    <p>AI 推理云平台 · “专业化智能（Specialized Intelligence）”领跑者 · 估值 175 亿美元、年化收入超 10 亿美元的开源模型推理新贵</p>
+    <div class="cards">
+      <div class="c"><div class="num">$17.5B</div><div class="lab">D轮投后估值 (2026.07)</div></div>
+      <div class="c"><div class="num">$1B+</div><div class="lab">年化收入 (ARR)</div></div>
+      <div class="c"><div class="num">40T+/天</div><div class="lab">日处理 Token</div></div>
+      <div class="c"><div class="num">10,000+</div><div class="lab">企业客户</div></div>
+      <div class="c"><div class="num">95%</div><div class="lab">Token 来自定制化模型</div></div>
+    </div>
+  </header>
+
+  <!-- 一、公司概况 -->
+  <section class="card">
+    <h2><span class="no">1</span>公司概况：Meta PyTorch 团队出身的“开源模型推理平台”</h2>
+    <p><b>Fireworks AI</b> 于 2022 年 10 月在美国创立（总部位于加州圣马特奥/雷德伍德城），是一家面向企业与开发者的<b>生成式 AI 推理与模型服务平台</b>：在统一的云端平台上托管、微调并规模化运行开源大模型（Llama、DeepSeek、Qwen、Mistral、Kimi、GLM 等），让企业无需自建 GPU 基础设施即可把开源模型投入生产。</p>
+    <div class="kpi-row">
+      <div class="kpi"><div class="n">2022</div><div class="t">成立年份</div></div>
+      <div class="kpi"><div class="n">304</div><div class="t">员工数 (2026.08)</div></div>
+      <div class="kpi"><div class="n">7位</div><div class="t">联合创始人（3位华人）</div></div>
+      <div class="kpi"><div class="n">$1.8B+</div><div class="t">累计融资</div></div>
+    </div>
+    <p><b>创始团队：</b>CEO <b>Lin Qiao（乔琳）</b>为复旦大学计算机系本硕、加州大学圣塔芭芭拉分校博士，曾任 Meta 工程高级总监，亲手带团队构建了 Caffe2、PyTorch 等框架（团队从 5 人发展到 300+ 人）；CTO <b>Dmytro Dzhulgakov</b> 及其他联合创始人（Benny Chen、Chenyu Zhao、Dmytro Ivchenko、James Reed、Pawel Garbacki）大多来自 Meta PyTorch/大规模 ML 基础设施团队。他们的初衷是解决“模型训练之后，如何在生产中快速、便宜、稳定地跑起来”这一推理环节的痛点。</p>
+    <p class="note">定位：介于“闭源大模型 API（OpenAI/Anthropic）”与“自建 GPU 自托管”之间的第三条路——<b>保留开源模型的可定制性与成本优势，同时免除自建基础设施的负担</b>。黄仁勋曾称其为“AI 界的台积电”。</p>
+  </section>
+
+  <!-- 二、业务模式 -->
+  <section class="card">
+    <h2><span class="no">2</span>业务模式：按用量计费的 B2B 推理基础设施</h2>
+    <h3>产品矩阵（从实验到生产全生命周期）</h3>
+    <table>
+      <tr><th>产品/能力</th><th>说明</th><th>计费方式</th></tr>
+      <tr><td>Serverless 推理</td><td>共享算力、开箱即用，覆盖 1000+ 开源模型（文本/视觉/多模态/语音/图片/Embedding/Rerank）</td><td>按 Token 计费（约 $0.07–$0.90 / 1M tokens，批量约 5 折）</td></tr>
+      <tr><td>On-Demand 专用部署</td><td>独享 GPU（A100/H100/H200/B200、AMD MI300），自动扩缩容</td><td>按 GPU 秒/小时</td></tr>
+      <tr><td>Enterprise Reserved</td><td>预购容量、多区域部署、BYOC、定制优化</td><td>GPU 预留 + 大客户协议价</td></tr>
+      <tr><td>微调 / RL 微调</td><td>SFT、DPO、GRPO/强化学习工作流</td><td>按训练 Token / GPU 小时</td></tr>
+      <tr><td>Training API / Training Agent</td><td>2026 年 8 月全量开放，从托管微调到自定义 Python 训练循环</td><td>按算力</td></tr>
+      <tr><td>Voice Agent 平台</td><td>转录+LLM+工具调用+流式部署，目标 &lt;500ms 延迟（语音客服/免下车点单等场景）</td><td>按用量</td></tr>
+    </table>
+    <h3>核心技术壁垒：用软件优化对冲 GPU 成本</h3>
+    <p>核心经济逻辑是“<b>把推理优化工程变成定价权</b>”：通过自研 <b>FireAttention</b> 推理引擎（含 AMD 优化实现）、<b>FireOptimizer</b>、连续批处理、投机解码（speculative decoding）、前缀缓存、<b>Multi-LoRA</b> 多适配器合并等，把同一模型跑得更快、吞吐更高，从而在低于自建/通用云成本的同时保持溢价。</p>
+    <p><b>战略架构：开源模型中立</b>。Fireworks 不押注单一基础模型，而是“谁开源当红就日 0 支持谁”，模型更迭反而成为增长来源。</p>
+    <div class="callout"><b>“专业化智能”叙事：</b>截至 D 轮，平台日处理 40 万亿+ Token 中 <b>95% 来自基于客户专有数据定制化的模型</b>。公司认为企业不再“租用通用智能”，而是“构建自己的智能”——这是其与闭源 API 的核心差异点。</div>
+  </section>
+
+  <!-- 三、融资历程 -->
+  <section class="card">
+    <h2><span class="no">3</span>融资历程：两年从 5.5 亿到 175 亿美元的“火箭式”估值</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="date">2024.03 · A轮</div><div class="what">$25M，Benchmark 领投</div><div class="det">早期证明：开源推理需求起步</div></div>
+      <div class="tl-item"><div class="date">2024.07 · B轮</div><div class="what">$52M @ $5.52 亿估值，红杉领投</div><div class="det">英伟达、AMD、MongoDB、Databricks 参投；客户从约 1000 家起量</div></div>
+      <div class="tl-item"><div class="date">2025.10 · C轮</div><div class="what">$250M @ $40 亿估值</div><div class="det">Lightspeed、Index、Evantic 联合领投，英伟达/AMD/MongoDB/Databricks 战略参投</div></div>
+      <div class="tl-item"><div class="date">2026.07 · D轮</div><div class="what">$1.505B @ $175 亿估值</div><div class="det">Atreides、Index、TCV 领投；英伟达、Lightspeed、Bessemer、Menlo、Insight、Lone Pine、安大略教师退休基金、20VC 等参投</div></div>
+    </div>
+    <p class="muted">估值仅 7-9 个月从 $4B 跳至 $17.5B（约 4.4x）；融资节奏“金额更大、间隔更短”。D 轮约 17.5x 收入倍数，显著高于传统基础设施软件的 8-12x，但低于部分模型实验室 20x+ 的估值水平。</p>
+  </section>
+
+  <!-- 四、财务与增长 -->
+  <section class="card">
+    <h2><span class="no">4</span>财务与增长：一年 5 倍的真实收入曲线</h2>
+    <p>公司 2026 年 7 月宣布年化收入（ARR）突破 <b>$10 亿</b>，同比增长约 <b>5 倍</b>；研究机构 Sacra 估计其 2026 年 5 月年化收入已达约 <b>$8 亿</b>（较 2025 年底约 $3.05 亿）。</p>
+    <table>
+      <tr><th>时间节点</th><th>年化收入 (ARR)</th><th>同比增速</th><th>日处理 Token</th></tr>
+      <tr><td>2025.12</td><td>~$3.05 亿</td><td>—</td><td>~15 万亿</td></tr>
+      <tr><td>2026.02</td><td>$3.15 亿</td><td>+416%</td><td>~18 万亿</td></tr>
+      <tr><td>2026.05</td><td>~$8 亿</td><td>+724%（Sacra 估算）</td><td>~28 万亿</td></tr>
+      <tr><td>2026.07（D轮）</td><td>$10 亿+</td><td>~5x</td><td>40 万亿+</td></tr>
+    </table>
+    <h3>客户与牵引力</h3>
+    <p>客户从 2024 年 7 月约 1,000 家增长到 2025 年 11 月 <b>10,000+ 家</b>（企业客户 10 倍、日 Token 70 倍增长）。知名客户横跨多个行业：</p>
+    <p><span class="chip">Cursor（AI编程）</span><span class="chip">Perplexity（搜索）</span><span class="chip">Notion（效率）</span><span class="chip">Sourcegraph（代码搜索）</span><span class="chip">Uber</span><span class="chip">DoorDash</span><span class="chip">Shopify</span><span class="chip">Upwork</span><span class="chip">Samsung</span><span class="chip">Verizon</span><span class="chip">GitLab</span><span class="chip">Quora</span><span class="chip">Harvey（法律AI）</span><span class="chip">Cresta（客服）</span><span class="chip">Hebbia</span><span class="chip">Geico / Revolut / Doximity</span></p>
+    <p>典型降本增效案例：Cursor 借助投机解码实现约 1000 Token/秒（约为标准 Llama 70B 的 13 倍）；Notion 将 AI 功能延迟从约 2 秒降到 350ms（覆盖 1 亿+ 用户）；Cresta 用 1 个基座模型 + 数千个 LoRA 适配器服务数百万次实时客服交互，部分场景成本较 GPT-4 低约 100 倍。</p>
+    <p class="note">毛利率约 50%（低于订阅软件 70%+），公司目标通过 GPU 利用率优化提升至约 60%。收入按用量计费、随生产流量增长，被投资者视为“质量更高的收入”。</p>
+  </section>
+
+  <!-- 五、竞争格局 -->
+  <section class="card">
+    <h2><span class="no">5</span>竞争格局：四个层面的对手</h2>
+    <div class="barchart">
+      <div class="bar-row"><div class="lbl">Fireworks AI</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#6d28d9;">$17.5B</div></div><div>$17.5B</div></div>
+      <div class="bar-row"><div class="lbl">Together AI</div><div class="bar-track"><div class="bar-fill" style="width:47%;background:#8b5cf6;">$8.3B</div></div><div>$8.3B</div></div>
+      <div class="bar-row"><div class="lbl">Baseten</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#a78bfa;">~$1.3B</div></div><div>~$1.3B</div></div>
+      <div class="note">2026 年 7 月各家最新估值（Baseten 另有 2026.06 的 15 亿美元 F 轮）</div>
+    </div>
+    <table>
+      <tr><th>竞争层级</th><th>代表玩家</th><th>对 Fireworks 的威胁</th></tr>
+      <tr><td>托管开源模型平台</td><td>Together AI、Baseten、Replicate、DeepInfra、Modal</td><td><b>最直接对手</b>。Together 2026.07 融 $8 亿 @ $83 亿估值，账面 ARR 约 $11.5 亿；Baseten 主打 VPC 自托管与合规客户</td></tr>
+      <tr><td>垂直整合硅片厂商</td><td>Groq、Cerebras、SambaNova</td><td>从硬件层压低延迟/成本；Groq 与 Meta 的 Llama 官方 API 合作抢走“日 0 支持”心智</td></tr>
+      <tr><td>云厂商捆绑</td><td>AWS Bedrock、Google Vertex、Azure Foundry、Databricks Model Serving</td><td><b>结构性威胁</b>：把推理并入既有云合同/合规/采购，可牺牲性能换取一栈式便利</td></tr>
+      <tr><td>开源框架商品化</td><td>vLLM、SGLang、TensorRT、NVIDIA NIM</td><td>长期压缩 FireAttention/FireOptimizer 的专有优势；OpenRouter 在路由层聚合各家</td></tr>
+    </table>
+    <p class="note">应对策略：与 AWS 签战略合作协议（含资助 POC）、入驻 Microsoft Foundry / Azure，把自己“插进”大厂采购渠道而非与之对抗。</p>
+  </section>
+
+  <!-- 六、前景与机遇 -->
+  <section class="card">
+    <h2><span class="no">6</span>前景：TAM 扩张与结构性机遇</h2>
+    <div class="grid2">
+      <div class="box bull"><h4>市场顺风</h4>
+        <ul>
+          <li>生成式 AI 模型支出预计从 2025 年 ~$140 亿增至 2028 年 ~$390 亿，推理是随用量增长的经常性开支；推理 SaaS 市场 2030 年预计 ~$1052 亿。</li>
+          <li>开源模型能力逼近闭源前沿，“自建智能”趋势利好中立推理平台。</li>
+        </ul>
+      </div>
+      <div class="box bull"><h4>向上游/新模态扩张</h4>
+        <ul>
+          <li><b>Voice Agent</b>：切入客服/BPO/企业电话的更大预算池。</li>
+          <li><b>Agent 强化学习微调</b>：成为领域智能体的“适配层”。</li>
+          <li><b>Multi-LoRA 适配器舰队</b>：管理存储/路由/监控数千适配器，加深粘性。</li>
+        </ul>
+      </div>
+      <div class="box bull"><h4>客户上移 + 地理扩张</h4>
+        <ul>
+          <li>从单点 serverless 扩展为“平台之选”：专用部署、微调、Embedding、语音、跨区域预留。</li>
+          <li>多区域部署（法兰克福、冰岛、东京、亚太）+ 数据驻留能力，打开欧洲 GDPR 与 APAC 市场。</li>
+        </ul>
+      </div>
+      <div class="box bull"><h4>战略纵深</h4>
+        <ul>
+          <li>2026.03 收购实时算力编排公司 <b>Hathora</b>（强化毫秒级路由与语音模型市场）。</li>
+          <li>英伟达、AMD 同时持股 → 潜在“中立硬件运行时”定位。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 七、风险 -->
+  <section class="card">
+    <h2><span class="no">7</span>风险与挑战：高估值之下的四座大山</h2>
+    <div class="grid2">
+      <div class="box bear"><h4>① 推理商品化</h4><p style="margin:0">vLLM/SGLang 等开源框架持续进化 + 质量调整后价格下行，FireAttention/FireOptimizer 专有优势面临压缩；若止步于“GPU 转售+50% 毛利”，差异化将消失。</p></div>
+      <div class="box bear"><h4>② 云厂商捕获</h4><p style="margin:0">Bedrock AgentCore / Azure Foundry 等把推理、Agent、安全并入更大控制面；企业更倾向“单一厂商采购”，Fireworks 可能沦为优化插件而非主平台。</p></div>
+      <div class="box bear"><h4>③ 硬件集中与供给</h4><p style="margin:0">不自建 GPU 机队、重度依赖英伟达前沿硬件（H100/H200/B200）；英伟达收购 Lepton 并推出竞品 GPU 云，存在分配与竞争双重风险。</p></div>
+      <div class="box bear"><h4>④ 客户集中度</h4><p style="margin:0">约一半收入曾来自 AI 编程公司 <b>Cursor</b>；2026.06 马斯克的 SpaceX 宣布以 600 亿美元全股票收购 Cursor，给单一客户风险蒙上变数。公司称已向多元化改善。</p></div>
+    </div>
+    <p class="note">其他：毛利率压力（50% vs 软件 70%+）、需持续对新模型保持“日 0”性能、17.5x 收入倍数需未来两季增长与毛利兑现支撑。</p>
+  </section>
+
+  <!-- 八、综合判断 -->
+  <section class="card">
+    <h2><span class="no">8</span>综合判断：推理层“土地争夺战”中的领先者</h2>
+    <div class="grid2">
+      <div class="box bull"><h4>看多逻辑</h4><ul>
+        <li>收入与估值同步增长（非脱离基本面的虚高），ARR 一年 5 倍、40 万亿 Token/日均为可验证运营指标。</li>
+        <li>在“服务模型而非训练模型”的价值层卡位成功，成为本年度最大 AI 基础设施轮次之一。</li>
+        <li>95% 定制化 Token 说明护城河在“适配层+粘性”，而非单纯低价转售。</li>
+        <li>英伟达/AMD 双重背书 + 大厂渠道合作（AWS/Microsoft）强化了分发。</li>
+      </ul></div>
+      <div class="box bear"><h4>看空/需跟踪</h4><ul>
+        <li>推理 Token 定价长期是“向下竞赛”，毛利天花板受限。</li>
+        <li>云厂商捆绑与开源商品化是持久的结构性压力。</li>
+        <li>客户集中（Cursor）与硬件供给依赖。</li>
+        <li>175 亿美元估值对增长与毛利的兑现要求极高。</li>
+      </ul></div>
+    </div>
+    <div class="callout"><b>一句话结论：</b>Fireworks AI 是当前“开源模型推理平台”赛道规模与增长双领先的头部玩家，D 轮把推理层从“工具”推向“AI 价值层”的叙事推向高潮；其前景高度取决于——能否持续以软件优化守住毛利与性能优势、能否在云厂商捆绑与开源商品化的夹缝中把客户粘性（微调/Agent/语音/多区域）转化为平台之选。核心跟踪指标：<b>毛利率是否迈向 60%</b>、<b>Cursor 依赖度下降</b>、<b>Together AI 增速对比</b>。</div>
+  </section>
+
+  <footer>
+    <b>主要数据来源（截至 2026-09-01）：</b><br>
+    <div class="src">· Fireworks AI 官方：D 轮公告 fireworks.ai/blog/series-d-announcement；Inference/Scale/AI-Native 产品页；Training API 公告；Hathora 收购公告（2026.08）</div>
+    <div class="src">· Sacra：sacra.com/c/fireworks-ai/（收入/估值/商业模式/竞争/风险，2026.08 更新）</div>
+    <div class="src">· Contrary Research：research.contrary.com/company/fireworks-ai（2026.08 深度备忘录）</div>
+    <div class="src">· Value Add VC：valueaddvc.com（D 轮估值与 ARR 拆解，2026.07）</div>
+    <div class="src">· 媒体：SiliconANGLE、Fortune、CNBC 转引、金融界（2026.07）、腾讯新闻/新浪（2026.07，乔琳专访）、36氪（2026.05）、网易（2026.05）、Lanceum、AI2.Work、TechFastForward 等</div>
+    <div class="note" style="margin-top:6px">注：部分收入/估值数据为公司披露或第三方（Sacra 等）估算；毛利率与客户集中度信息来自公司向投资者披露及媒体报道，可能随时间更新。本报告仅供研究参考，不构成投资建议。</div>
+  </footer>
+
+</div>
+</body>
+</html>

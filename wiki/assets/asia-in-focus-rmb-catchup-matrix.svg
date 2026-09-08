@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 620" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <title>中国 GDP 追赶美国敏感度矩阵</title>
+  <text x="390" y="36" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a1a1a">中国 GDP 追赶美国（名义值）敏感度矩阵</text>
+  <text x="390" y="60" text-anchor="middle" font-size="13" fill="#555">美国名义增速假设 4.5%/年 · 官方 GDP 数据 · 来源：Goldman Sachs Global Investment Research（Exhibit 4，报告转述）</text>
+
+  <!-- matrix geometry -->
+  <!-- x labels: cols 2..7 ; y labels: rows 0..6 -->
+  <g font-size="15" fill="#1a1a1a" text-anchor="middle">
+    <text x="172" y="98">2%</text>
+    <text x="264" y="98">3%</text>
+    <text x="356" y="98">4%</text>
+    <text x="448" y="98">5%</text>
+    <text x="540" y="98">6%</text>
+    <text x="632" y="98">7%</text>
+  </g>
+  <g font-size="15" fill="#1a1a1a" text-anchor="end">
+    <text x="120" y="136">0%</text>
+    <text x="120" y="188">1%</text>
+    <text x="120" y="240">2%</text>
+    <text x="120" y="292">3%</text>
+    <text x="120" y="344">4%</text>
+    <text x="120" y="396">5%</text>
+    <text x="120" y="448">6%</text>
+  </g>
+  <text x="30" y="300" text-anchor="middle" font-size="14" fill="#333" transform="rotate(-90 30 300)">人民币对美元年化升值（%）</text>
+  <text x="390" y="512" text-anchor="middle" font-size="14" fill="#333">中国年化名义增速（%）</text>
+
+  <!-- cells: row = appreciation 0..6, col = growth 2..7 -->
+  <!-- row 0 -->
+  <rect x="126" y="110" width="92" height="52" fill="#d9d9d9" stroke="#fff" stroke-width="2"/>
+  <rect x="218" y="110" width="92" height="52" fill="#d9d9d9" stroke="#fff" stroke-width="2"/>
+  <rect x="310" y="110" width="92" height="52" fill="#d9d9d9" stroke="#fff" stroke-width="2"/>
+  <rect x="402" y="110" width="92" height="52" fill="#313695" stroke="#fff" stroke-width="2"/>
+  <rect x="494" y="110" width="92" height="52" fill="#4575b4" stroke="#fff" stroke-width="2"/>
+  <rect x="586" y="110" width="92" height="52" fill="#74add1" stroke="#fff" stroke-width="2"/>
+  <!-- row 1 -->
+  <rect x="126" y="162" width="92" height="52" fill="#d9d9d9" stroke="#fff" stroke-width="2"/>
+  <rect x="218" y="162" width="92" height="52" fill="#d9d9d9" stroke="#fff" stroke-width="2"/>
+  <rect x="310" y="162" width="92" height="52" fill="#313695" stroke="#fff" stroke-width="2"/>
+  <rect x="402" y="162" width="92" height="52" fill="#4575b4" stroke="#fff" stroke-width="2"/>
+  <rect x="494" y="162" width="92" height="52" fill="#74add1" stroke="#fff" stroke-width="2"/>
+  <rect x="586" y="162" width="92" height="52" fill="#abd9e9" stroke="#fff" stroke-width="2"/>
+  <!-- row 2 -->
+  <rect x="126" y="214" width="92" height="52" fill="#d9d9d9" stroke="#fff" stroke-width="2"/>
+  <rect x="218" y="214" width="92" height="52" fill="#313695" stroke="#fff" stroke-width="2"/>
+  <rect x="310" y="214" width="92" height="52" fill="#4575b4" stroke="#fff" stroke-width="2"/>
+  <rect x="402" y="214" width="92" height="52" fill="#74add1" stroke="#fff" stroke-width="2"/>
+  <rect x="494" y="214" width="92" height="52" fill="#abd9e9" stroke="#fff" stroke-width="2"/>
+  <rect x="586" y="214" width="92" height="52" fill="#e0f3f8" stroke="#fff" stroke-width="2"/>
+  <!-- row 3 -->
+  <rect x="126" y="266" width="92" height="52" fill="#313695" stroke="#fff" stroke-width="2"/>
+  <rect x="218" y="266" width="92" height="52" fill="#4575b4" stroke="#fff" stroke-width="2"/>
+  <rect x="310" y="266" width="92" height="52" fill="#74add1" stroke="#fff" stroke-width="2"/>
+  <rect x="402" y="266" width="92" height="52" fill="#abd9e9" stroke="#fff" stroke-width="2"/>
+  <rect x="494" y="266" width="92" height="52" fill="#e0f3f8" stroke="#fff" stroke-width="2"/>
+  <rect x="586" y="266" width="92" height="52" fill="#fddbc7" stroke="#fff" stroke-width="2"/>
+  <!-- row 4 -->
+  <rect x="126" y="318" width="92" height="52" fill="#4575b4" stroke="#fff" stroke-width="2"/>
+  <rect x="218" y="318" width="92" height="52" fill="#74add1" stroke="#fff" stroke-width="2"/>
+  <rect x="310" y="318" width="92" height="52" fill="#abd9e9" stroke="#fff" stroke-width="2"/>
+  <rect x="402" y="318" width="92" height="52" fill="#e0f3f8" stroke="#fff" stroke-width="2"/>
+  <rect x="494" y="318" width="92" height="52" fill="#fddbc7" stroke="#fff" stroke-width="2"/>
+  <rect x="586" y="318" width="92" height="52" fill="#f4a582" stroke="#fff" stroke-width="2"/>
+  <!-- row 5 -->
+  <rect x="126" y="370" width="92" height="52" fill="#74add1" stroke="#fff" stroke-width="2"/>
+  <rect x="218" y="370" width="92" height="52" fill="#abd9e9" stroke="#fff" stroke-width="2"/>
+  <rect x="310" y="370" width="92" height="52" fill="#e0f3f8" stroke="#fff" stroke-width="2"/>
+  <rect x="402" y="370" width="92" height="52" fill="#fddbc7" stroke="#fff" stroke-width="2"/>
+  <rect x="494" y="370" width="92" height="52" fill="#f4a582" stroke="#fff" stroke-width="2"/>
+  <rect x="586" y="370" width="92" height="52" fill="#d6604d" stroke="#fff" stroke-width="2"/>
+  <!-- row 6 -->
+  <rect x="126" y="422" width="92" height="52" fill="#abd9e9" stroke="#fff" stroke-width="2"/>
+  <rect x="218" y="422" width="92" height="52" fill="#e0f3f8" stroke="#fff" stroke-width="2"/>
+  <rect x="310" y="422" width="92" height="52" fill="#fddbc7" stroke="#fff" stroke-width="2"/>
+  <rect x="402" y="422" width="92" height="52" fill="#f4a582" stroke="#fff" stroke-width="2"/>
+  <rect x="494" y="422" width="92" height="52" fill="#d6604d" stroke="#fff" stroke-width="2"/>
+  <rect x="586" y="422" width="92" height="52" fill="#b2182b" stroke="#fff" stroke-width="2"/>
+
+  <!-- cell text -->
+  <g font-size="16" font-weight="bold" text-anchor="middle">
+    <!-- row 0 -->
+    <text x="172" y="143" fill="#666">—</text><text x="264" y="143" fill="#666">—</text><text x="356" y="143" fill="#666">—</text>
+    <text x="448" y="143" fill="#fff">2120</text><text x="540" y="143" fill="#fff">2057</text><text x="632" y="143" fill="#fff">2045</text>
+    <!-- row 1 -->
+    <text x="172" y="195" fill="#666">—</text><text x="264" y="195" fill="#666">—</text>
+    <text x="356" y="195" fill="#fff">2120</text><text x="448" y="195" fill="#fff">2057</text><text x="540" y="195" fill="#fff">2045</text><text x="632" y="195" fill="#333">2039</text>
+    <!-- row 2 -->
+    <text x="172" y="247" fill="#666">—</text>
+    <text x="264" y="247" fill="#fff">2120</text><text x="356" y="247" fill="#fff">2057</text><text x="448" y="247" fill="#fff">2045</text><text x="540" y="247" fill="#333">2039</text><text x="632" y="247" fill="#333">2036</text>
+    <!-- row 3 -->
+    <text x="172" y="299" fill="#fff">2120</text><text x="264" y="299" fill="#fff">2057</text><text x="356" y="299" fill="#fff">2045</text><text x="448" y="299" fill="#333">2039</text><text x="540" y="299" fill="#333">2036</text><text x="632" y="299" fill="#333">2034</text>
+    <!-- row 4 -->
+    <text x="172" y="351" fill="#fff">2057</text><text x="264" y="351" fill="#fff">2045</text><text x="356" y="351" fill="#333">2039</text><text x="448" y="351" fill="#333">2036</text><text x="540" y="351" fill="#333">2034</text><text x="632" y="351" fill="#333">2033</text>
+    <!-- row 5 -->
+    <text x="172" y="403" fill="#fff">2045</text><text x="264" y="403" fill="#333">2039</text><text x="356" y="403" fill="#333">2036</text><text x="448" y="403" fill="#333">2034</text><text x="540" y="403" fill="#333">2033</text><text x="632" y="403" fill="#fff">2032</text>
+    <!-- row 6 -->
+    <text x="172" y="455" fill="#333">2039</text><text x="264" y="455" fill="#333">2036</text><text x="356" y="455" fill="#333">2034</text><text x="448" y="455" fill="#333">2033</text><text x="540" y="455" fill="#fff">2032</text><text x="632" y="455" fill="#fff">2031</text>
+  </g>
+
+  <!-- legend -->
+  <g font-size="13">
+    <rect x="126" y="540" width="40" height="18" fill="#b2182b"/>
+    <rect x="166" y="540" width="40" height="18" fill="#d6604d"/>
+    <rect x="206" y="540" width="40" height="18" fill="#f4a582"/>
+    <rect x="246" y="540" width="40" height="18" fill="#fddbc7"/>
+    <rect x="286" y="540" width="40" height="18" fill="#e0f3f8"/>
+    <rect x="326" y="540" width="40" height="18" fill="#abd9e9"/>
+    <rect x="366" y="540" width="40" height="18" fill="#74add1"/>
+    <rect x="406" y="540" width="40" height="18" fill="#4575b4"/>
+    <rect x="446" y="540" width="40" height="18" fill="#313695"/>
+    <rect x="560" y="540" width="40" height="18" fill="#d9d9d9"/>
+    <text x="126" y="578" fill="#333">2031（最快）</text>
+    <text x="416" y="578" fill="#333">2120（最慢）</text>
+    <text x="560" y="578" fill="#666">— 无法追赶</text>
+  </g>
+  <text x="390" y="606" text-anchor="middle" font-size="12" fill="#888">单元格 = 在该增速与升值组合下，中国名义 GDP 首次追平美国（市场汇率）的年份；"—" 表示模拟期内无法追赶</text>
+</svg>
