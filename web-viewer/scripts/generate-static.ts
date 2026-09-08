@@ -11,6 +11,7 @@ const repoRoot = path.resolve(appRoot, '..');
 const staticRoot = path.join(appRoot, 'static-generated');
 const assetsRoot = path.join(staticRoot, 'content');
 const allowedPrefixes = ['raw/', 'wiki/'];
+const markdownAssetPattern = /!\[[^\]]*\]\((?!\s*(?:https?:|data:|blob:))\s*([^\s)]+)(?:\s+["'][^"']*["'])?\s*\)/gi;
 
 function trackedFiles(): Set<string> {
   const output = execFileSync('git', ['ls-files', '-z', '--', 'raw', 'wiki'], { cwd: repoRoot });
@@ -50,12 +51,29 @@ const tracked = trackedFiles();
 const all = await listEntries();
 const files = all.filter((file) => tracked.has(file.path) && allowedPrefixes.some((prefix) => file.path.startsWith(prefix))).map((file) => ({ ...file, editable: false }));
 const payloads: StaticSiteData['payloads'] = {}; const searchText: Record<string, string> = {};
+const copiedAssets = new Set<string>();
+async function copyTrackedAsset(relativePath: string) {
+  if (copiedAssets.has(relativePath)) return;
+  if (!tracked.has(relativePath) || !allowedPrefixes.some((prefix) => relativePath.startsWith(prefix))) return;
+  const source = path.join(repoRoot, relativePath);
+  const destination = path.join(assetsRoot, relativePath);
+  await fs.mkdir(path.dirname(destination), { recursive: true });
+  await fs.copyFile(source, destination);
+  copiedAssets.add(relativePath);
+}
 for (const file of files) {
   const payload = await readFilePayload(file.path); searchText[file.path] = `${file.title} ${file.path} ${payload.content || ''}`;
-  if (payload.content !== undefined) payloads[file.path] = { file, content: payload.content };
-  else {
-    const publicPath = `content/${file.path}`; const destination = path.join(staticRoot, publicPath); await fs.mkdir(path.dirname(destination), { recursive: true });
-    await fs.copyFile(path.join(repoRoot, file.path), destination); payloads[file.path] = { file, url: publicPath };
+  if (payload.content !== undefined) {
+    payloads[file.path] = { file, content: payload.content };
+    if (file.kind === 'md') {
+      for (const match of payload.content.matchAll(markdownAssetPattern)) {
+        const reference = decodeURIComponent(match[1]).replaceAll('\\', '/');
+        const relativeAsset = path.posix.normalize(path.posix.join(path.posix.dirname(file.path), reference));
+        await copyTrackedAsset(relativeAsset);
+      }
+    }
+  } else {
+    await copyTrackedAsset(file.path); payloads[file.path] = { file, url: `content/${file.path}` };
   }
 }
 const tags = new Map<string, number>();
@@ -71,4 +89,4 @@ const data: StaticSiteData = { generatedAt: new Date().toISOString(), rootName: 
 await fs.mkdir(path.join(staticRoot, 'data'), { recursive: true });
 await fs.writeFile(path.join(staticRoot, 'data/site-data.json'), JSON.stringify(data));
 await fs.writeFile(path.join(staticRoot, '.nojekyll'), '');
-console.log(`Static data generated: ${files.length} tracked files, ${Object.keys(payloads).length} payloads.`);
+console.log(`Static data generated: ${files.length} tracked files, ${Object.keys(payloads).length} payloads, ${copiedAssets.size} assets.`);
