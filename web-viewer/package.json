@@ -16,7 +16,7 @@
     "build:client": "vite build client",
     "build:pages": "tsx scripts/generate-static.ts && VITE_STATIC_MODE=true vite build client",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run server/test",
+    "test": "vitest run server/test client/test",
     "test:ui": "tsx smoke.ts",
     "test:pages": "tsx smoke-pages.ts"
   },

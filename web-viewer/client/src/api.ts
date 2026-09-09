@@ -1,6 +1,7 @@
 import type { ApiErrorBody, DashboardData, FilePayload, FileEntry, SearchResult, StaticSiteData, TabInfo, TreeNode } from './types';
 
 let writeToken = '';
+let writeTokenRefreshPromise: Promise<void> | null = null;
 let staticDataPromise: Promise<StaticSiteData> | null = null;
 
 export const isStaticMode = import.meta.env.VITE_STATIC_MODE === 'true';
@@ -20,14 +21,35 @@ export class ApiError extends Error {
   }
 }
 
-async function request<T>(url: string, init?: RequestInit): Promise<T> {
+async function refreshWriteToken(staleToken: string): Promise<void> {
+  if (writeToken !== staleToken) return;
+  writeTokenRefreshPromise ||= fetch('/api/bootstrap', { cache: 'no-store' }).then(async (response) => {
+    const contentType = response.headers.get('content-type') || '';
+    const body = contentType.includes('application/json') ? await response.json() : await response.text();
+    if (!response.ok) throw new ApiError(response.status, typeof body === 'string' ? { error: body } : body);
+    writeToken = String((body as { token?: string }).token || '');
+    if (!writeToken) throw new ApiError(500, { error: '服务端未返回写操作令牌' });
+  }).finally(() => { writeTokenRefreshPromise = null; });
+  return writeTokenRefreshPromise;
+}
+
+async function request<T>(url: string, init?: RequestInit, retryInvalidToken = true): Promise<T> {
   const headers = new Headers(init?.headers);
+  const isWrite = Boolean(init?.method && !['GET', 'HEAD'].includes(init.method.toUpperCase()));
+  const requestWriteToken = writeToken;
   if (init?.body && !(init.body instanceof FormData)) headers.set('Content-Type', 'application/json');
-  if (init?.method && !['GET', 'HEAD'].includes(init.method.toUpperCase())) headers.set('X-Write-Token', writeToken);
+  if (isWrite) headers.set('X-Write-Token', requestWriteToken);
   const response = await fetch(url, { ...init, headers });
   const contentType = response.headers.get('content-type') || '';
   const body = contentType.includes('application/json') ? await response.json() : await response.text();
-  if (!response.ok) throw new ApiError(response.status, typeof body === 'string' ? { error: body } : body);
+  if (!response.ok) {
+    const errorBody = typeof body === 'string' ? { error: body } : body as ApiErrorBody;
+    if (!isStaticMode && isWrite && retryInvalidToken && response.status === 403 && errorBody.error === '写操作令牌无效') {
+      await refreshWriteToken(requestWriteToken);
+      return request<T>(url, init, false);
+    }
+    throw new ApiError(response.status, errorBody);
+  }
   return body as T;
 }
 
