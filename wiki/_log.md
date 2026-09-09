@@ -8,6 +8,46 @@ created: 2026-08-26
 
 > 按时间倒序记录知识库的所有变更操作。
 
+## 2026-09-10
+
+### 收录：Linux 文件 IO 演进史 — 从 read/write 到 io_uring 的四次范式跃迁（第六篇原始资料）
+
+- **原始资料**：`raw/2026-09-10-linux-file-io-evolution.md`
+- **来源类型**：微信公众号技术长文；作者 z.ai.dev，发布于 2026-07-26
+- **来源链接**：https://mp.weixin.qq.com/s/F4DSsGd6VGgW6xybDbrFog
+- **范围**：Linux 文件 IO 三十年演进，四次范式跃迁（pread/pwrite、向量化 IO、O_DIRECT、io_uring），及 SPDK/DPDK 用户态栈延伸
+
+**新建页面（8 个）**：
+1. `raw/2026-09-10-linux-file-io-evolution.md` — 原始全文整理，含四次跃迁的技术细节与权衡
+2. `wiki/summaries/linux-file-io-evolution.md` — 摘要页：核心观点、四次跃迁对比表、关键数据、关联实体
+3. `wiki/entities/io-uring.md` — io_uring 实体页：设计、SQPOLL、Fixed Buffers/Files、安全争议
+4. `wiki/entities/jens-axboe.md` — Jens Axboe 实体页：io_uring 作者、Linux 块层维护者
+5. `wiki/entities/nvme.md` — NVMe 实体页：性能特征及对 IO 栈的影响
+6. `wiki/entities/spdk.md` — SPDK 实体页：用户态存储栈、UIO/VFIO、与 DPDK 关系
+7. `wiki/entities/dpdk.md` — DPDK 实体页：用户态网络数据面、与 SPDK 对比
+8. `wiki/entities/linux-aio.md` — Linux AIO (libaio) 实体页：设计思路、四大局限、与 io_uring 对比
+9. `wiki/assets/linux-io-evolution-timeline.svg` — 四次范式跃迁时间线与统一脉络图
+
+**更新页面（3 个）**：
+- `wiki/_index.md` — 更新统计（原始资料 6、摘要 5、实体 23）、最近更新、分类入口与标签云
+- `wiki/_log.md` — 记录本次收录
+- `inbox/_inbox.md` — 将该 HTML 文件状态从 `inbox` 标记为 `archived`
+
+**核心判断**：
+- Linux IO 三十年演进的统一逻辑是"控制权转移"：内核将偏移量管理、数据布局与调度、缓存管理、执行模型四项决策权逐步移交给应用层。
+- 每次交权遵循相同模式：某类应用（数据库、网络服务器、分布式存储）规模增长后，内核通用默认行为成为性能陷阱，内核因此开放新控制接口。
+- io_uring 用共享内存 SQ/CQ 环形缓冲区替代 syscall，SQPOLL 模式下批量提交 100 个 IO 仅需 0-1 次 syscall，从根本上解决了 NVMe 时代 syscall 开销瓶颈。
+- SPDK 是演化逻辑的终点——通过 UIO/VFIO 绕过内核直接操作 NVMe 硬件，但代价是应用需自行处理安全隔离、资源共享和错误恢复。
+- io_uring 的安全争议（扩大内核攻击面，ChromeOS/Android 一度禁用）表明安全与性能的张力是每次交权的永恒问题。
+
+**知识图谱关联**：
+- [[io_uring]] ↔ [[Jens Axboe]] ↔ [[NVMe]]
+- [[io_uring]] ↔ [[Linux AIO]]（前代不成功尝试）
+- [[SPDK]] ↔ [[DPDK]]（存储/网络领域的用户态数据面双子）
+- [[Linux 文件 IO 演进史]] ↔ 四次跃迁统一脉络
+
+---
+
 ## 2026-09-09
 
 ### 收录：广场协议及其对日本经济的影响（第五篇原始资料）

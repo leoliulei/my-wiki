@@ -2,7 +2,7 @@
 type: inbox-manifest
 title: 暂存区清单
 created: 2026-09-06
-updated: 2026-09-06
+updated: 2026-09-10
 ---
 
 # 暂存区清单
@@ -32,7 +32,9 @@ updated: 2026-09-06
 
 ## 已归档
 
-（暂无）
+| 文件 | 来源 URL | 抓取时间 | 大小 | 状态 |
+|---|---|---|---:|---|
+| files/2026-09-10-Linux 文件 IO 演进史-从 read-write 到 io_uring 的四次范式跃迁.html | https://mp.weixin.qq.com/s/F4DSsGd6VGgW6xybDbrFog | 2026-09-09T17:17:58Z | 8,608,939 | archived |
 
 <!--
 登记格式示例：
@@ -40,3 +42,32 @@ updated: 2026-09-06
 |---|---|---|---|---:|---|---:|---|---|
 | files/某论文.pdf | https://example.com/paper | https://cdn.example.com/paper.pdf | 2026-09-06T12:00:00+08:00 | 200 | application/pdf | 1234567 | abc123... | inbox |
 -->
+
+<!-- WEB_VIEWER_DATA
+[
+  {
+    "path": "inbox/files/wappoc_appmsgcaptcha.html",
+    "sourceUrl": "https://mp.weixin.qq.com/s/F4DSsGd6VGgW6xybDbrFog",
+    "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HN6LoWqjnZKRsQabeaNQoWzFvrhv78BsyAOp27XC&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FF4DSsGd6VGgW6xybDbrFog",
+    "fetchedAt": "2026-09-09T16:39:58.343Z",
+    "httpStatus": 200,
+    "contentType": "text/html",
+    "size": 18164,
+    "sha256": "a07966ef85b67f2ccc006fa57582b9074270b5de51dcca79f41888ad3115e0e2",
+    "status": "review"
+  },
+  {
+    "path": "inbox/files/2026-09-10-Linux 文件 IO 演进史-从 read-write 到 io_uring 的四次范式跃迁.html",
+    "title": "Linux 文件 IO 演进史-从 read-write 到 io_uring 的四次范式跃迁",
+    "sourceUrl": "https://mp.weixin.qq.com/s/F4DSsGd6VGgW6xybDbrFog",
+    "finalUrl": "https://mp.weixin.qq.com/s/F4DSsGd6VGgW6xybDbrFog",
+    "fetchedAt": "2026-09-09T17:17:58.062Z",
+    "httpStatus": 200,
+    "contentType": "text/html",
+    "size": 8608939,
+    "sha256": "fab3729e0e246b7e0f05655fd2211c730c62b8dc69556e062fb4df459090af75",
+    "contentSha256": "f729c1fe4ebd8b652cd064e3c6851dab2fdc05010f2846588cf8350fdc1e5e45",
+    "status": "archived"
+  }
+]
+WEB_VIEWER_DATA -->

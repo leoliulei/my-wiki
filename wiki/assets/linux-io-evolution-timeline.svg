@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fafbfc"/>
+      <stop offset="100%" stop-color="#f0f2f5"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a90d9"/>
+      <stop offset="100%" stop-color="#2c5f8a"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="720" fill="url(#bg)" rx="8"/>
+
+  <!-- Title -->
+  <text x="550" y="42" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a2e">Linux 文件 IO 四次范式跃迁</text>
+  <text x="550" y="66" text-anchor="middle" font-size="13" fill="#666">内核隐式决策 → 应用显式控制的 30 年交权史</text>
+
+  <!-- Timeline axis -->
+  <line x1="80" y1="120" x2="1020" y2="120" stroke="#c0c8d4" stroke-width="2"/>
+  <polygon points="1020,114 1032,120 1020,126" fill="#c0c8d4"/>
+  <text x="1035" y="125" font-size="11" fill="#999">时间</text>
+
+  <!-- Era labels on axis -->
+  <text x="155" y="108" text-anchor="middle" font-size="11" fill="#888">1991</text>
+  <text x="385" y="108" text-anchor="middle" font-size="11" fill="#888">POSIX</text>
+  <text x="615" y="108" text-anchor="middle" font-size="11" fill="#888">2016 (4.6)</text>
+  <text x="845" y="108" text-anchor="middle" font-size="11" fill="#888">2019 (5.1)</text>
+
+  <!-- Four transition cards -->
+  <!-- Card 1 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="145" width="210" height="260" rx="8" fill="#fff" stroke="#4a90d9" stroke-width="1.5"/>
+    <rect x="70" y="145" width="210" height="36" rx="8" fill="#4a90d9"/>
+    <rect x="70" y="170" width="210" height="11" fill="#4a90d9"/>
+    <text x="175" y="169" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">第一次跃迁</text>
+  </g>
+  <text x="175" y="205" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a2e">流 → 可寻址</text>
+  <text x="175" y="228" text-anchor="middle" font-size="11" fill="#555">read/write</text>
+  <text x="175" y="244" text-anchor="middle" font-size="11" fill="#555">↓</text>
+  <text x="175" y="260" text-anchor="middle" font-size="11" fill="#555">pread/pwrite</text>
+  <line x1="95" y1="275" x2="255" y2="275" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="85" y="295" font-size="10.5" fill="#666">痛点：f_pos 共享可变状态</text>
+  <text x="85" y="312" font-size="10.5" fill="#666">导致多线程 TOCTOU 竞态</text>
+  <text x="85" y="335" font-size="10.5" fill="#666">本质：去状态化</text>
+  <text x="85" y="355" font-size="10.5" font-weight="600" fill="#4a90d9">交出：偏移量管理权</text>
+  <text x="85" y="380" font-size="10" fill="#999">无副作用操作天然支持并发</text>
+
+  <!-- Arrow 1->2 -->
+  <line x1="285" y1="275" x2="335" y2="275" stroke="url(#arrowGrad)" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#2c5f8a"/>
+    </marker>
+  </defs>
+
+  <!-- Card 2 -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="145" width="210" height="260" rx="8" fill="#fff" stroke="#50b86c" stroke-width="1.5"/>
+    <rect x="340" y="145" width="210" height="36" rx="8" fill="#50b86c"/>
+    <rect x="340" y="170" width="210" height="11" fill="#50b86c"/>
+    <text x="445" y="169" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">第二次跃迁</text>
+  </g>
+  <text x="445" y="205" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a2e">单块 → 批量与可控</text>
+  <text x="445" y="228" text-anchor="middle" font-size="11" fill="#555">read → readv/writev</text>
+  <text x="445" y="244" text-anchor="middle" font-size="11" fill="#555">→ preadv/pwritev</text>
+  <text x="445" y="260" text-anchor="middle" font-size="11" fill="#555">→ preadv2 (flags)</text>
+  <line x1="365" y1="275" x2="525" y2="275" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="355" y="295" font-size="10.5" fill="#666">痛点：一次 syscall 搬一块</text>
+  <text x="355" y="312" font-size="10.5" fill="#666">连续内存；无法表达意图</text>
+  <text x="355" y="335" font-size="10.5" fill="#666">本质：表达力增强</text>
+  <text x="355" y="355" font-size="10.5" font-weight="600" fill="#50b86c">交出：数据布局与调度</text>
+  <text x="355" y="380" font-size="10" fill="#999">RWF_NOWAIT / HIPRI / DSYNC</text>
+
+  <!-- Arrow 2->3 -->
+  <line x1="555" y1="275" x2="605" y2="275" stroke="url(#arrowGrad)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Card 3 -->
+  <g filter="url(#shadow)">
+    <rect x="610" y="145" width="210" height="260" rx="8" fill="#fff" stroke="#e8a838" stroke-width="1.5"/>
+    <rect x="610" y="145" width="210" height="36" rx="8" fill="#e8a838"/>
+    <rect x="610" y="170" width="210" height="11" fill="#e8a838"/>
+    <text x="715" y="169" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">第三次跃迁</text>
+  </g>
+  <text x="715" y="205" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a2e">内核缓存 → 应用自管</text>
+  <text x="715" y="228" text-anchor="middle" font-size="11" fill="#555">Buffered IO</text>
+  <text x="715" y="244" text-anchor="middle" font-size="11" fill="#555">↓</text>
+  <text x="715" y="260" text-anchor="middle" font-size="11" fill="#555">Direct IO (O_DIRECT)</text>
+  <line x1="635" y1="275" x2="795" y2="275" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="625" y="295" font-size="10.5" fill="#666">痛点：双重缓存浪费内存</text>
+  <text x="625" y="312" font-size="10.5" fill="#666">LRU 淘汰与应用模式冲突</text>
+  <text x="625" y="335" font-size="10.5" fill="#666">本质：缓存管理权转移</text>
+  <text x="625" y="355" font-size="10.5" font-weight="600" fill="#e8a838">交出：缓存管理权</text>
+  <text x="625" y="380" font-size="10" fill="#999">DMA 直传，需对齐约束</text>
+
+  <!-- Arrow 3->4 -->
+  <line x1="825" y1="275" x2="875" y2="275" stroke="url(#arrowGrad)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Card 4 -->
+  <g filter="url(#shadow)">
+    <rect x="880" y="145" width="200" height="260" rx="8" fill="#fff" stroke="#d94a6b" stroke-width="1.5"/>
+    <rect x="880" y="145" width="200" height="36" rx="8" fill="#d94a6b"/>
+    <rect x="880" y="170" width="200" height="11" fill="#d94a6b"/>
+    <text x="980" y="169" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">第四次跃迁</text>
+  </g>
+  <text x="980" y="205" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a2e">syscall → 共享内存</text>
+  <text x="980" y="228" text-anchor="middle" font-size="11" fill="#555">同步 IO / Linux AIO</text>
+  <text x="980" y="244" text-anchor="middle" font-size="11" fill="#555">↓</text>
+  <text x="980" y="260" text-anchor="middle" font-size="11" fill="#555">io_uring (5.1, 2019)</text>
+  <line x1="900" y1="275" x2="1060" y2="275" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="895" y="295" font-size="10.5" fill="#666">痛点：NVMe 时代 syscall</text>
+  <text x="895" y="312" font-size="10.5" fill="#666">开销成为吞吐瓶颈</text>
+  <text x="895" y="335" font-size="10.5" fill="#666">本质：交互模型变革</text>
+  <text x="895" y="355" font-size="10.5" font-weight="600" fill="#d94a6b">交出：执行模型</text>
+  <text x="895" y="380" font-size="10" fill="#999">SQ/CQ 环形缓冲区 + SQPOLL</text>
+
+  <!-- Bottom: unified logic bar -->
+  <rect x="70" y="440" width="1010" height="50" rx="8" fill="#1a1a2e"/>
+  <text x="575" y="463" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">统一脉络：内核隐式决策 → 应用显式控制</text>
+  <text x="575" y="483" text-anchor="middle" font-size="12" fill="#a0b4c8">偏移量管理权 → 数据布局与调度 → 缓存管理权 → 执行模型（交互通道）</text>
+
+  <!-- Bottom: beyond io_uring -->
+  <text x="70" y="525" font-size="13" font-weight="700" fill="#1a1a2e">演化仍在继续</text>
+  <line x1="70" y1="535" x2="1080" y2="535" stroke="#e0e0e0" stroke-width="1"/>
+
+  <!-- Security concern box -->
+  <rect x="70" y="550" width="490" height="130" rx="8" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="90" y="575" font-size="12" font-weight="700" fill="#d94a6b">安全争议</text>
+  <text x="90" y="598" font-size="11" fill="#555">io_uring 扩大内核攻击面：共享内存、</text>
+  <text x="90" y="615" font-size="11" fill="#555">内核轮询线程、固定缓冲区映射引入</text>
+  <text x="90" y="632" font-size="11" fill="#555">复杂状态管理代码。ChromeOS / Android</text>
+  <text x="90" y="649" font-size="11" fill="#555">一度禁用 io_uring。安全 vs 性能的</text>
+  <text x="90" y="666" font-size="11" fill="#555">张力是每次交权的永恒问题。</text>
+
+  <!-- Userspace stack box -->
+  <rect x="590" y="550" width="490" height="130" rx="8" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="610" y="575" font-size="12" font-weight="700" fill="#2c5f8a">用户态存储栈：逻辑终点？</text>
+  <text x="610" y="598" font-size="11" fill="#555">SPDK 通过 UIO/VFIO 将 NVMe 设备</text>
+  <text x="610" y="615" font-size="11" fill="#555">直接映射到用户态，用户态驱动直接</text>
+  <text x="610" y="632" font-size="11" fill="#555">操作硬件寄存器，完全消除 syscall。</text>
+  <text x="610" y="649" font-size="11" fill="#555">与网络领域 DPDK 异曲同工。应用直</text>
+  <text x="610" y="666" font-size="11" fill="#555">接对话硬件，内核退出数据路径。</text>
+
+  <!-- Footer -->
+  <text x="550" y="705" text-anchor="middle" font-size="10" fill="#aaa">来源：《Linux 文件 IO 演进史》z.ai.dev · 2026-07 · 数据口径：原文所述</text>
+</svg>
