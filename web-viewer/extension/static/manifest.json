@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "my-wiki 微信文章收藏",
+  "version": "1.0.0",
+  "description": "将当前微信公众号文章正文和图片保存到本机 my-wiki 暂存区。",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": [
+    "https://mp.weixin.qq.com/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*"
+  ],
+  "action": {
+    "default_title": "收藏到 my-wiki",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

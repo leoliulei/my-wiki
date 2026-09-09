@@ -33,6 +33,7 @@
 | 三层知识模型 | `inbox/` 随手收藏，`raw/` 保存不可变证据，`wiki/` 承载可再生理解 |
 | Web 阅读与编辑 | 浏览 Markdown、HTML、PDF、图片；支持全文搜索、分类导航、在线编辑和 wiki-link 侧栏预览 |
 | 安全网址收藏 | 服务端逐跳校验 URL，拦截私网/环回地址，限制响应类型、大小、重定向和超时，并保存原始响应字节 |
+| 微信文章收藏 | Chrome 扩展读取当前已登录文章页，清洗正文并由本地服务下载、内嵌图片，保存为单文件离线 HTML |
 | 可审计写入 | wiki 写操作记录到 `_log.md`；编辑采用版本校验、原子写入和冲突恢复 |
 | 多工具兼容 | 可直接用 Obsidian、Foam、任意 Markdown 编辑器、Git 和命令行操作 |
 
@@ -99,7 +100,36 @@ npm start
 
 服务日志保存在 `~/Library/Logs/my-wiki/`。代码或依赖更新后，再运行一次 `install` 即可重新构建并替换后台服务配置。
 
-### 4. 开发模式
+### 4. 收藏微信公众号文章
+
+微信公众号可能阻止无浏览器会话的服务端抓取。项目内置 Manifest V3 Chrome 扩展，直接从当前已登录的文章页读取正文，再交给本地服务清洗并保存。
+
+先确保 Web 服务已启动，并构建扩展：
+
+```bash
+cd web-viewer
+npm run build:extension
+```
+
+在 Chrome / Chromium 中打开 `chrome://extensions/`：
+
+1. 开启右上角“开发者模式”。
+2. 点击“加载已解压的扩展程序”。
+3. 选择仓库中的 `web-viewer/dist/extension/`。
+4. 打开一篇 `https://mp.weixin.qq.com/s/example` 形式的微信文章。
+5. 点击扩展图标，确认本地服务地址（本项目后台服务使用自定义端口时，例如 `http://127.0.0.1:4318`），再点击“保存当前文章”。
+
+扩展会将正文保存为 `inbox/files/YYYY-MM-DD-文章标题.html`：
+
+- 只读取当前微信文章页，不读取 Cookie、密码或浏览器存储中的登录凭据。
+- 正文经过标签、属性和 URL 协议白名单清洗，脚本、表单和事件处理器不会写入本地文件。
+- 图片由本地服务逐个执行 DNS 与 SSRF 校验后下载，并以内嵌 Data URL 写入 HTML，离线打开仍可显示。
+- 单张图片上限 12 MB，最多本地化 80 张；失败或超限的图片保留原地址，暂存项标记为“需确认”。
+- 扩展仅连接 `mp.weixin.qq.com` 以及 `127.0.0.1` / `localhost` 本地服务。
+
+代码或扩展更新后重新执行 `npm run build:extension`，然后在 `chrome://extensions/` 中点击该扩展的“重新加载”。常规的 `npm run build`、`./scripts/start-local.sh` 和 `./scripts/macos-service.sh install` 也会自动构建扩展。
+
+### 5. 开发模式
 
 ```bash
 cd web-viewer
@@ -253,7 +283,9 @@ my-wiki/
 │   └── macos-service.sh      # macOS launchd 后台服务管理
 └── web-viewer/
     ├── client/               # React + Vite 前端
-    ├── server/               # Express 文件系统 API
+    ├── extension/            # Chrome 微信文章收藏扩展源码
+    ├── server/               # Express 文件系统与浏览器文章导入 API
+    ├── scripts/              # 静态站点与扩展构建脚本
     ├── smoke.ts              # 浏览器烟测与截图脚本
     └── package.json
 ```
@@ -302,6 +334,7 @@ npm run dev        # 同时启动前后端开发服务
 npm run typecheck  # TypeScript 严格检查
 npm test           # 文件系统安全边界单元测试
 npm run build      # 生产构建 + 类型检查
+npm run build:extension # 构建 Chrome 微信文章收藏扩展
 npm run test:ui    # 本地完整模式浏览器烟测并更新 README 截图
 npm run build:pages # 导出 Git 已追踪内容并生成 Pages 静态站点
 npm run test:pages # 验证 /my-wiki/ 子路径下的静态只读模式

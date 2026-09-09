@@ -22,7 +22,7 @@ describe('写操作令牌恢复', () => {
       jsonResponse({ token: 'new-token', rootName: 'my-wiki' }),
       jsonResponse({ id: 'job-1', state: 'connecting', downloaded: 0 }, 202),
     ];
-    const fetchMock = vi.fn(async () => {
+    const fetchMock = vi.fn(async (..._args: Parameters<typeof fetch>) => {
       const response = responses.shift();
       if (!response) throw new Error('unexpected fetch');
       return response;

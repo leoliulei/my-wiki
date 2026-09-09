@@ -49,7 +49,7 @@ function isPublicIp(address: string): boolean {
   return false;
 }
 
-async function resolvePublic(hostname: string) {
+export async function resolvePublicAddress(hostname: string) {
   const lower = hostname.toLowerCase();
   if (lower === 'localhost' || lower.endsWith('.localhost') || lower.endsWith('.local')) throw new Error('出于安全原因，不能访问本机或内网地址');
   const records = net.isIP(hostname) ? [{ address: hostname, family: net.isIP(hostname) }] : await dns.lookup(hostname, { all: true, verbatim: true });
@@ -67,7 +67,7 @@ function pinnedLookup(resolved: { address: string; family: number }): LookupFunc
 function requestOnce(target: URL, signal: AbortSignal, onProgress: (bytes: number, total?: number) => void): Promise<{ response: http.IncomingMessage; finalUrl: URL; address: string }> {
   return new Promise(async (resolve, reject) => {
     let resolved: { address: string; family: number };
-    try { resolved = await resolvePublic(target.hostname); } catch (error) { reject(error); return; }
+    try { resolved = await resolvePublicAddress(target.hostname); } catch (error) { reject(error); return; }
     const transport = target.protocol === 'https:' ? https : http;
     const req = transport.request(target, {
       method: 'GET', headers: { 'User-Agent': 'my-wiki-local-viewer/1.0', Accept: 'text/html,text/plain,text/markdown,application/pdf,image/*' },
@@ -162,6 +162,10 @@ async function perform(job: DownloadJob) {
   } catch (error) {
     await fsp.rm(part, { force: true }); throw error;
   }
+}
+
+export function pinnedLookupForAddress(resolved: { address: string; family: number }): LookupFunction {
+  return pinnedLookup(resolved);
 }
 
 export function createPinnedLookupForTest(address: string, family: number): LookupFunction {

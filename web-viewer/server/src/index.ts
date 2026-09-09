@@ -12,6 +12,7 @@ import {
   type InboxStatus,
 } from './files.js';
 import { jobs, publicJob, startDownload } from './downloader.js';
+import { saveBrowserArticle } from './browser-article.js';
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: MAX_FILE_SIZE } });
@@ -23,7 +24,7 @@ const withWriteLock = async <T>(task: () => Promise<T>): Promise<T> => {
 };
 
 app.disable('x-powered-by');
-app.use(express.json({ limit: '2mb' }));
+app.use(express.json({ limit: '6mb' }));
 app.use((_, response, next) => {
   response.setHeader('X-Content-Type-Options', 'nosniff');
   response.setHeader('Referrer-Policy', 'no-referrer');
@@ -198,6 +199,10 @@ app.post('/api/inbox/text', async (request, response, next) => {
       await atomicWrite(absolutePath(relative), content); return readFilePayload(relative);
     }); response.status(201).json(payload);
   } catch (error) { next(error); }
+});
+app.post('/api/inbox/browser-article', async (request, response, next) => {
+  try { const result = await withWriteLock(() => saveBrowserArticle(request.body)); response.status(result.duplicate ? 200 : 201).json(result); }
+  catch (error) { next(error); }
 });
 app.post('/api/inbox/url', (request, response, next) => { try { const job = startDownload(String(request.body.url || '')); response.status(202).json(publicJob(job)); } catch (error) { next(error); } });
 app.get('/api/inbox/url/:id', (request, response) => { const job = jobs.get(request.params.id); if (!job) { response.status(404).json({ error: '抓取任务不存在' }); return; } response.json(publicJob(job)); });

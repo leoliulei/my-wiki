@@ -15,8 +15,10 @@ export interface InboxRecord {
   fetchedAt?: string;
   httpStatus?: number;
   contentType?: string;
+  title?: string;
   size?: number;
   sha256?: string;
+  contentSha256?: string;
   status: InboxStatus;
 }
 export interface FileEntry {
@@ -145,7 +147,7 @@ export async function readEntry(relative: string, records?: InboxRecord[]): Prom
   const record = (records || await readInboxManifest()).find((item) => item.path === safe);
   const status = ((frontmatter?.status as InboxStatus | undefined) || record?.status || (safe.startsWith('inbox/') && safe !== 'inbox/_inbox.md' ? 'inbox' : undefined));
   return {
-    path: safe, name: path.basename(safe), title: titleFor(safe, frontmatter), kind, zone: zoneOf(safe), size: stat.size,
+    path: safe, name: path.basename(safe), title: record?.title || titleFor(safe, frontmatter), kind, zone: zoneOf(safe), size: stat.size,
     mtime: stat.mtimeMs, version: `${stat.mtimeMs}:${contentHash}`, frontmatter, category: categoryFor(safe, frontmatter),
     editable: !safe.startsWith('raw/') && kind === 'md' && safe !== 'inbox/_inbox.md', status,
     sourceUrl: record?.sourceUrl || (typeof frontmatter?.source === 'string' && /^https?:/.test(frontmatter.source) ? frontmatter.source : undefined),
