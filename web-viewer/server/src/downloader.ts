@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import http from 'node:http';
 import https from 'node:https';
-import net from 'node:net';
+import net, { type LookupFunction } from 'node:net';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { MAX_FILE_SIZE } from './config.js';
@@ -57,6 +57,13 @@ async function resolvePublic(hostname: string) {
   return records[0];
 }
 
+function pinnedLookup(resolved: { address: string; family: number }): LookupFunction {
+  return (_hostname, options, callback) => {
+    if (options.all) callback(null, [{ address: resolved.address, family: resolved.family }]);
+    else callback(null, resolved.address, resolved.family);
+  };
+}
+
 function requestOnce(target: URL, signal: AbortSignal, onProgress: (bytes: number, total?: number) => void): Promise<{ response: http.IncomingMessage; finalUrl: URL; address: string }> {
   return new Promise(async (resolve, reject) => {
     let resolved: { address: string; family: number };
@@ -64,7 +71,7 @@ function requestOnce(target: URL, signal: AbortSignal, onProgress: (bytes: numbe
     const transport = target.protocol === 'https:' ? https : http;
     const req = transport.request(target, {
       method: 'GET', headers: { 'User-Agent': 'my-wiki-local-viewer/1.0', Accept: 'text/html,text/plain,text/markdown,application/pdf,image/*' },
-      timeout: 20_000, lookup: (_hostname, _options, callback) => callback(null, resolved.address, resolved.family as 4 | 6),
+      timeout: 20_000, lookup: pinnedLookup(resolved),
       servername: target.hostname,
     }, (response) => {
       const total = Number(response.headers['content-length'] || 0) || undefined;
@@ -155,6 +162,10 @@ async function perform(job: DownloadJob) {
   } catch (error) {
     await fsp.rm(part, { force: true }); throw error;
   }
+}
+
+export function createPinnedLookupForTest(address: string, family: number): LookupFunction {
+  return pinnedLookup({ address, family });
 }
 
 export function startDownload(sourceUrl: string): DownloadJob {
